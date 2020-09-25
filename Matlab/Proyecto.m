@@ -1,4 +1,4 @@
-%% Clear Section. algo
+%% Clear Section.
 % Partimos con el codigo.
 clc
 clear
