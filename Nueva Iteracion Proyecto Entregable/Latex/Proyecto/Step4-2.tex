@@ -1,0 +1,12 @@
+\noindent En segunda instancia, se analizó el caso de un contrato \textit{Forward.}. A diferencia del caso anterior, en esta oportunidad el \textit{Strike Price} si toma importancia, dado que es necesario para el cálculo del \textit{Payoff}, que viene dado por la siguiente ecuación:
+\begin{equation}
+    V(S_t)=max(S_t-K,0)
+\end{equation}
+
+\noindent A su vez, también conocemos la forma del valor teórico de la opción \textit{Forward}, el cuál viene dado por la fórmula cerrada:
+\begin{equation}
+    V_0=D^{FOR}(T)\cdot S- D^{DOM}(T)\cdot K = e^{-r\cdot T}\cdot S- e^{-q\cdot T}\cdot K
+\end{equation}
+\noindent A continuación, tomando estos puntos en consideración, se procedió a realizar las simulaciones de \textit{Monte-Carlo}, nuevamente utilizando una volatilidad $\sigma=0$, para mantener los cálculos de forma determinista. Los cálculos fueron realizados nuevamente para todos los \textit{Tenores} con el mismo pilar \textit{Delta} \textit{C10}. De manera similar a la pregunta anterior, se obtuvo un error pequeño, específicamente del 0.082052\%.\\\\
+\noindent Finalmente, se volvió a comprobar que los valores obtenidos empíricamente estuvieran dentro de un intervalo de confianza del 99\%, replicando el procedimiento de la pregunta anterior, en el cuál se obtuvo que un 99.9502\% de los datos se encontraban dentro del intervalo de confianza.
+\newpage

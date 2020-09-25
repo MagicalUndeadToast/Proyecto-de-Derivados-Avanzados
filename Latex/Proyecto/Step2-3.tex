@@ -1,0 +1,40 @@
+En esta sección, primero se procedió a verificar la consistencia de las volatilidades entregadas ($\sigma$), las cuales serán utilizadas posteriormente en el cálculo del precio de las opciones (\textit{Option Fair Value}). Para el caso de las volatilidades, se procedió a descomponer los diferentes $\sigma$, en términos de \textit{Risk Reversal} y \textit{Butterfly} utilizando las siguientes ecuaciones:
+
+\begin{equation}
+    \sigma_{Call}= \sigma_{ATM}+\sigma_{BF}+\frac{\sigma_{RR}}{2}
+\end{equation}
+\begin{equation}
+    \sigma_{Put}= \sigma_{ATM}+\sigma_{BF}-\frac{\sigma_{RR}}{2}
+\end{equation}
+
+\noindent Las cuales, en términos de sus $\Delta$, son consistentes con las volatilidades entregadas en los datos del documento \textit{Excel}, presentando un error prácticamente de cero, tal como se puede observar en las tablas anexadas 5 y 6. \\\\
+\noindent Una vez obtenidas las volatilidades, se procedió a utilizarlas para calcular el precio de las opciones, tanto para los diferentes \textit{Tenores}, como para los diversos $\Delta$, mediante la formula de Black-Scholes, la cual de forma general se puede expresar como:
+
+\begin{equation}
+    V_0= \epsilon \cdot S_0 \cdot e^{-qT} \cdot N(\epsilon \cdot d_1) - \epsilon \cdot K \cdot e^{-rT} \cdot N(\epsilon \cdot d_2)
+\end{equation}
+\noindent En donde:
+\begin{equation*}
+    d_1= \frac{\ln(\frac{S_0}{K})+(r-q)\cdot T}{\sigma \cdot \sqrt{T}}+ \frac{\sigma \cdot \sqrt{T}}{2}
+\end{equation*}
+\begin{equation*}
+    d_2=d_1-\sigma \cdot \sqrt{T}
+\end{equation*}
+
+     \begin{equation*}
+     \label{eq:aqui-le-mostramos-como-hacerle-la-llave-grande}
+     \epsilon = \left\{
+	       \begin{array}{ll}
+		 +1      &  si\ es\ una\ opción\ Call\\
+		 -1 &  si\;es\;una\;opción\;Put\\
+		 
+	       \end{array}
+	     \right.
+   \end{equation*}
+   
+   \begin{equation*}
+       N = Funci\acute{o}n\;de\;Densidad\;Acumulada
+   \end{equation*}
+\noindent Finalmente, realizando el procedimiento anterior se obtuvo un error promedio de 0.0934, lo que, dado los relativamente diminutos valores de las opciones puede ser considerado un valor a tomar en cuenta, según la comparación entre los valores calculados y los valores teóricos presentados en el documento \textit{Excel}. Estos errores se muestran en las tablas anexadas 7 y 8 respectivamente, con una muestra de 50 valores en conjunto a su error respectivo.
+\newpage
+
