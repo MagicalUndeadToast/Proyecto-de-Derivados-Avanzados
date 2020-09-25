@@ -34,7 +34,15 @@ r=log(RDiscount)./(-T);
 % Pasamos el factor de descuento a la tasa extranjera.
 q=log(QDiscount)./(-T);
 
+%% New Code Section.
+% Nueva seccion de codigo.
+
+
+%% Espacio de Calculo.
+% Espacio para hacer calculos en el programa sin tener que correr la
+% simulacion de nuevo.
 %%
+
 
 
 
