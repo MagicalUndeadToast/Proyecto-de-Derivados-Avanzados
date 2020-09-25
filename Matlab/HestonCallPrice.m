@@ -1,5 +1,5 @@
-function [] = HestonCallPrice()
-%UNTITLED Summary of this function goes here
+function [] = HestonCallPrice(S,K,r,f)
+%Funcion que computa el precio de la opcion 
 %   Detailed explanation goes here
 
 end
