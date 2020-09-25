@@ -9,7 +9,7 @@ dphi=0.01;
 maxphi=50;
 phi=(eps:dphi:maxphi)';
 
-% w=
+% w=?
 % theta=?
 % psi=?
 
