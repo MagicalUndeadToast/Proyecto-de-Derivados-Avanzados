@@ -36,7 +36,7 @@ q=log(QDiscount)./(-T);
 
 %% New Code Section.
 % Nueva seccion de codigo.
-vt=0.01;
+vt=0.5;
 theta=0.015;
 w=0.01;
 sig=0.01;
@@ -45,12 +45,12 @@ rho=0.05;
 psi=theta.*w;
 
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
-
+%AVISAR AL GUILLE
 for e=1:804
     Prueba(e,1)=...
         HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
         q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
-    BSFormula(e,1)=BlackScholes(1, Spot(e,1), Strike(e,1), q(e,1), r(e,1), Tiempo(e,1), Sigma(e,1));
+    BSFormula(e,1)=BlackScholes(1, Spot(e,1), Strike(e,1), q(e,1), r(e,1), Tiempo(e,1), 0.5);
 end
 ErrorPromedio(Prueba,BSFormula)
 

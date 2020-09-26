@@ -36,10 +36,10 @@ q=log(QDiscount)./(-T);
 
 %% New Code Section.
 % Nueva seccion de codigo.
-vt=0.01;
+vt=0.5;
 theta=0.015;
 w=0.01;
-sig=0.0001;
+sig=0.01;
 rho=0.05;
 
 psi=theta.*w;
@@ -50,10 +50,22 @@ for e=1:804
     Prueba(e,1)=...
         HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
         q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
-    BSFormula(e,1)=BlackScholes(1, Spot(e,1), Strike(e,1), q(e,1), r(e,1), Tiempo(e,1), Sigma(e,1));
+    BSFormula(e,1)=BlackScholes(1, Spot(e,1), Strike(e,1), q(e,1), r(e,1), Tiempo(e,1), 0.5);
 end
-ErrorPromedio(Prueba,BSFormula)
 
+
+
+%% MMA Section Code.
+% Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
+
+%% Calculos para el Forward.
+% Aca hacer los calculos para el Forward con Heston.
+
+%% Agregamos las Volatilidades.
+% Aca ya no se que poner si te soy sincero.
+
+%% Calculo con Heston de Volatilidad Implicita.
+% Aca deberiamos usar Newton Raphson.
 
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
