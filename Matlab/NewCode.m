@@ -52,6 +52,18 @@ for e=1:804
         q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
 end
 
+%% MMA Section Code.
+% Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
+
+%% Calculos para el Forward.
+% Aca hacer los calculos para el Forward con Heston.
+
+%% Agregamos las Volatilidades.
+% Aca ya no se que poner si te soy sincero.
+
+%% Calculo con Heston de Volatilidad Implicita.
+% Aca deberiamos usar Newton Raphson.
+
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
 % simulacion de nuevo.
