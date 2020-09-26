@@ -24,7 +24,7 @@ OptionValue(1,:)=[];
 % Pasamos el tiempo a un numero entre 0 y 1.
 for i=1:size(T,1)
     for k=1:size(T,2)
-        Tiempo(i,k)=T(i,k)/T(i,5);  %#ok<SAGROW>
+        Tiempo(i,k)=T(i,k)/T(i,5);  
     end
 end
 %% Tercera Seccion.
