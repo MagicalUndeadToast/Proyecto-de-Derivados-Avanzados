@@ -23,6 +23,10 @@ phi=(eps:dphi:maxphi)';
 % varianza.
 % vt= Variance Initial Guess. Variancia inicial.
 
+% Usar esta funcion como ciclos for mejor, ahorra mas tiempo que pensar en
+% las operaciones matriciales y en aquellas elemento a elemento que luego
+% no coinciden con el resto de las otras.
+
 f1 = CF_SVj(log(Spot),vt,T,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
 P1 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f1./(1i*phi))*dphi);
 f2 = CF_SVj(log(Spot),vt,T,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
