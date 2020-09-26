@@ -17,6 +17,12 @@ phi=(eps:dphi:maxphi)';
 % theta=\theta
 % psi=\psi
 
+% \theta= Mean Reversion Speed. Mas grande mas lenta la reversion a la
+% media.
+% w= Equilibrio de la varianza, suponemos que es donde esta mas o menos la
+% varianza.
+% vt= Variance Initial Guess. Variancia inicial.
+
 f1 = CF_SVj(log(Spot),vt,T,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
 P1 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f1./(1i*phi))*dphi);
 f2 = CF_SVj(log(Spot),vt,T,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
