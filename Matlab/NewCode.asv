@@ -39,7 +39,7 @@ q=log(QDiscount)./(-T);
 vt=0.01;
 theta=0.015;
 w=0.01;
-sig=0.01;
+sig=0.0001;
 rho=0.05;
 
 psi=theta.*w;
@@ -54,18 +54,6 @@ for e=1:804
 end
 ErrorPromedio(Prueba,BSFormula)
 
-
-%% MMA Section Code.
-% Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
-
-%% Calculos para el Forward.
-% Aca hacer los calculos para el Forward con Heston.
-
-%% Agregamos las Volatilidades.
-% Aca ya no se que poner si te soy sincero.
-
-%% Calculo con Heston de Volatilidad Implicita.
-% Aca deberiamos usar Newton Raphson.
 
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
