@@ -92,7 +92,7 @@ M=10;
 N=10000;
 for i=1:5
     for k=1:size(r,1)  %CAMBIAR ESTO A SIZE(r,2) PARA CODIGO COMPLETO
-        ValueMMA(k,i)=getMonteCarlos(Spot(k,1),1,0, r(k,i), q(k,i),0, Tiempo(k,i),M,N,'MMA');
+        ValueMMA(k,i)=getMonteCarlos(1,Spot(k,1),0, r(k,i), q(k,i),0, Tiempo(k,i),M,N,'MMA');
         RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
     end
 end

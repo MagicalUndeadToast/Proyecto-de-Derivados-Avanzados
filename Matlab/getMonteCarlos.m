@@ -1,8 +1,8 @@
-function SM= getMonteCarlos(e,Spot,Strike, r, q,Sigma, T,M,N,opcion)
+function SM= getMonteCarlos(e,Spot,Strike, r, q,Sigma, Tiempo,M,N,opcion)
 
 rng(2);
 a=0;
-b=T;
+b=Tiempo;
 tiempo= linspace(a,b,N);%genera N numeros espaciados de igual forma entre a y b.
 SM=Spot; %Crea matriz inicial con valores iniciales igual a So.
 dt=tiempo(2);  %t2-t1
@@ -22,7 +22,7 @@ switch opcion
     fprint('Posiblemente exista un error');
 end
 
-Yt=VT./exp(r*T);
+Yt=VT./exp(r*Tiempo);
 SM=mean(Yt);
 
 
