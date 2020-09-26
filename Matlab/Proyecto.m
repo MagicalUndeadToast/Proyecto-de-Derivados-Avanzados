@@ -24,7 +24,7 @@ OptionValue(1,:)=[];
 % Pasamos el tiempo a un numero entre 0 y 1.
 for i=1:size(T,1)
     for k=1:size(T,2)
-        Tiempo(i,k)=T(i,k)/T(i,5); 
+        Tiempo(i,k)=T(i,k)/T(i,5);
     end
 end
 %% Tercera Seccion.
@@ -145,5 +145,7 @@ disp("El error con Monte-Carlos de Black-Scholes es de un: " + ErrorMCBS*100+"%"
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
 % simulacion de nuevo.
+% Abrir una funcion open('').
+
 %%
 

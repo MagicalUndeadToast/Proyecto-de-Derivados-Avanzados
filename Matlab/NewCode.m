@@ -24,7 +24,7 @@ OptionValue(1,:)=[];
 % Pasamos el tiempo a un numero entre 0 y 1.
 for i=1:size(T,1)
     for k=1:size(T,2)
-        Tiempo(i,k)=T(i,k)/T(i,5); 
+        Tiempo(i,k)=T(i,k)/T(i,5);  %#ok<SAGROW>
     end
 end
 %% Tercera Seccion.
@@ -47,16 +47,17 @@ psi=theta.*w;
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 
 for e=1:804
-    YAhoraQue(e,1)=HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi);
+    Prueba(e,1)=...
+        HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
+        q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
 end
-
-
-
 
 
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
 % simulacion de nuevo.
+% Abrir una funcion open('').
+
 %%
 
 
