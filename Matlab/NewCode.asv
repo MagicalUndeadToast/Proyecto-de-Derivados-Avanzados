@@ -44,12 +44,7 @@ rho=0.05;
 
 psi=theta.*w;
 
-%HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
-
-for e=1:804
-    YAhoraQue(e,1)=HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi);
-end
-
+HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 
 
 
