@@ -49,11 +49,11 @@ for e=1:804
     Prueba(e,1)=...
         HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
         q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
-    caca(e,1)=ValueBS(Spot(e,1),Strike(e,1),r(e,1)...
+    PruebaBS(e,1)=ValueBS(Spot(e,1),Strike(e,1),r(e,1)...
         ,q(e,1),Tiempo(e,1),0.05,1);
 end
 
-ErrorPromedio(Prueba,caca)
+ErrorPromedio(Prueba,PruebaBS)
 
 
 
@@ -75,9 +75,12 @@ ErrorPromedio(ValueMMA, RDiscountNuevos)
 ErrorPromedio(ValueForward,ValorTeoricoFW)
 
 %% Agregamos las Volatilidades.
-[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi);
+% Aca ya no se que poner si te soy sincero.
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi);
 
-
+ErrorHSBS=ErrorPromedio(ValueHSBS,ValorTeoricoHSBS);
+ErrorHSBS=ErrorHSBS/ErrorPromedio(0,ValorTeoricoHSBS);
+disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
 %% Calculo con Heston de Volatilidad Implicita.
 % Aca deberiamos usar Newton Raphson.
 
