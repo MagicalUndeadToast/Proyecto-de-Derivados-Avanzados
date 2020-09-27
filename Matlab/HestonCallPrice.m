@@ -31,7 +31,14 @@ f1 = CF_SVj(log(Spot),vt,T,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
 P1 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f1./(1i*phi))*dphi);
 f2 = CF_SVj(log(Spot),vt,T,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
 P2 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f2./(1i*phi))*dphi);
-C = Spot*exp(-q*T)*P1 -Strike*exp(-r*T)*P2;
+
+if(log(Spot)==0)
+    C=Spot*exp(-r*T);
+elseif(vt==0)
+    C= max(Spot.*exp(-q.*T)-Strike.*exp(-r.*T),0);
+else
+    C = Spot*exp(-q*T)*P1 -Strike*exp(-r*T)*P2;
+end
 
 end
 

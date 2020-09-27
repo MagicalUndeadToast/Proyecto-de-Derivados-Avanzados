@@ -36,7 +36,7 @@ q=log(QDiscount)./(-T);
 
 %% New Code Section.
 % Nueva seccion de codigo.
-vt=0.999;
+vt=0.9;
 theta=0.015;
 w=0.01;
 sig=0.25;
@@ -47,12 +47,12 @@ psi=theta.*w;
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 for e=1:804
     Prueba(e,1)=...
-        HestonCallPrice(1,Strike(e,1),r(e,1),...
+        HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
         q(e,1),T(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
 end
 
-ErrorPromedio(Prueba,RDiscount(:,1))
-
+ErrorPromedio(Prueba,RDiscount(:,1));
+ErrorPromedio(Prueba,Forward(:,1))
 
 
 
