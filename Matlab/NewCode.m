@@ -90,6 +90,9 @@ ErrorFWHS=ErrorPromedio(ValueForward,ValorTeoricoFW);
 ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFW);
 disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 
+[PorcentajeFWMC,PorcentajesFWMC,LimiteInferiorFWMC,LimiteSuperiorFWMC,contadoresFWMC]=...
+    IntervaloDeConfianza(ValorTeoricoFW,ValueForward);
+
 %% Agregamos las Volatilidades.
 % Aca ya no se que poner si te soy sincero.
 
@@ -103,6 +106,8 @@ disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 ErrorHSBS=ErrorPromedio(ValueHSBS,ValorTeoricoHSBS);
 ErrorHSBS=ErrorHSBS/ErrorPromedio(0,ValorTeoricoHSBS);
 disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
+
+
 
 %% Calculo con Heston de Volatilidad Implicita.
 % Aca deberiamos usar Newton Raphson.
