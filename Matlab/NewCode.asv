@@ -36,11 +36,12 @@ q=log(QDiscount)./(-T);
 
 %% New Code Section.
 % Nueva seccion de codigo.
-vt=0.9;
+vt=0.01;
 theta=0.015;
 w=0.01;
 sig=0.25;
 rho=0.05;
+
 
 psi=theta.*w;
 
@@ -48,11 +49,13 @@ psi=theta.*w;
 for e=1:804
     Prueba(e,1)=...
         HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
-        q(e,1),T(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
+        q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
+    caca(e,1)=ValueBS(Spot(k,1),Strike(k,1),r(k,1)...
+        ,q(k,1),Tiempo(e,1),0.05,1);
 end
 
-ErrorPromedio(Prueba,RDiscount(:,1));
-ErrorPromedio(Prueba,Forward(:,1))
+ErrorPromedio(Prueba,caca)
+
 
 
 
@@ -63,7 +66,8 @@ ErrorPromedio(Prueba,Forward(:,1))
 % Aca hacer los calculos para el Forward con Heston.
 
 %% Agregamos las Volatilidades.
-% Aca ya no se que poner si te soy sincero.
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi);
+
 
 %% Calculo con Heston de Volatilidad Implicita.
 % Aca deberiamos usar Newton Raphson.

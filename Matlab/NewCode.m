@@ -50,7 +50,8 @@ for e=1:804
     Prueba(e,1)=...
         HestonCallPrice(Spot(e,1),Strike(e,1),r(e,1),...
         q(e,1),Tiempo(e,1),vt,theta,w,sig,rho,psi); %#ok<*SAGROW>
-    caca(e,1)=BlackScholes(1, Spot(e,1), Strike(e,1), q(e,1), r(e,1), Tiempo(e,1), 0.05);
+    caca(e,1)=ValueBS(Spot(e,1),Strike(e,1),r(e,1)...
+        ,q(e,1),Tiempo(e,1),0.05,1);
 end
 
 ErrorPromedio(Prueba,caca)
