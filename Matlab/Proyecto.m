@@ -96,6 +96,7 @@ for i=1:5
         RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
     end
 end
+
 % Diferencia porcentual.
 ErrorMC=abs(ValueMMA./RDiscountNuevos-1);
 ErrorMC=mean(mean(abs(ErrorMC))); %AJUSTAR RDISCOUNT PARA EL ERROR

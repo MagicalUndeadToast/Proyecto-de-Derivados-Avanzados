@@ -42,9 +42,8 @@ w=0.01;
 sig=0.25;
 rho=0.05;
 
-
 psi=theta.*w;
-
+%%
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 for e=1:804
     Prueba(e,1)=...
@@ -61,12 +60,22 @@ ErrorPromedio(Prueba,caca)
 
 %% MMA Section Code.
 % Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
+for i=1:5
+    for k=1:size(r,1)  %CAMBIAR ESTO A SIZE(r,2) PARA CODIGO COMPLETO
+        ValueMMA(k,i)=HestonCallPrice(1,Strike(k,1),r(k,i),q(k,i),Tiempo(k,i),vt,theta,w,sig,rho,psi);
+        RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
+    end
+end
 
+ErrorPromedio(ValueMMA, RDiscountNuevos)
 %% Calculos para el Forward.
 % Aca hacer los calculos para el Forward con Heston.
 
+[ValueForward,ValorTeoricoFW] = ForwardHeston(1,Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi);
+ErrorPromedio(ValueForward,ValorTeoricoFW)
+
 %% Agregamos las Volatilidades.
-[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi);
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi);
 
 
 %% Calculo con Heston de Volatilidad Implicita.
