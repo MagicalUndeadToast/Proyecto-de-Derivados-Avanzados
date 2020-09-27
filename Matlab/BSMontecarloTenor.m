@@ -122,7 +122,7 @@ for k=1:size(r,1)
 end
 
 
-% Ahora cambiamos a una volatilidad de 0.2.
+% Ahora cambiamos a una volatilidad de 0.5.
 SigmaMCBS=0.5;
 % Tenor de 1 mes.
 for k=1:size(r,1)
