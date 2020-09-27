@@ -69,7 +69,7 @@ end
 
 ErrorMMAHS=ErrorPromedio(ValueMMA, RDiscountNuevos);
 ErrorMMAHS=ErrorMMAHS/ErrorPromedio(0,RDiscountNuevos);
-disp("El error con Heston del Forward es de un: " + ErrorMMAHS*100+"%")
+disp("El error con Heston del MMA es de un: " + ErrorMMAHS*100+"%")
 %% Calculos para el Forward.
 % Aca hacer los calculos para el Forward con Heston.
 
