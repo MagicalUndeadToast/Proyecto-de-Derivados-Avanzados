@@ -79,7 +79,7 @@ ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFW);
 disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 %% Agregamos las Volatilidades.
 % Aca ya no se que poner si te soy sincero.
-[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi);
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,vt, theta,w,sig,rho,psi);
 
 ErrorHSBS=ErrorPromedio(ValueHSBS,ValorTeoricoHSBS);
 ErrorHSBS=ErrorHSBS/ErrorPromedio(0,ValorTeoricoHSBS);
