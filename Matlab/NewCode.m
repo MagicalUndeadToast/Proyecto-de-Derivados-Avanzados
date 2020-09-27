@@ -5,6 +5,7 @@ clear
 clear ALL
 rng(2);
 %Secciones del codigo.
+
 %% Primera Seccion.
 % Carga de los datos.
 [Spot,RDiscount,QDiscount,Forward,Sigma,SigmaRR,Strike,T,OptionValue ...
@@ -18,6 +19,7 @@ SigmaRR=SigmaRR/100;
 Strike(1,:)=[];
 % Eliminamos primera fila.
 OptionValue(1,:)=[];
+
 %% Segunda Seccion.
 % Transformacion de algunos datos y otros procesos
 % respectivos.
@@ -27,6 +29,7 @@ for i=1:size(T,1)
         Tiempo(i,k)=T(i,k)/T(i,5);
     end
 end
+
 %% Tercera Seccion.
 % Hacemos el calculo del Forward.
 % Pasamos el factor de descuento a la tasa domestica.
@@ -43,6 +46,7 @@ sig=0.25;
 rho=0.05;
 
 psi=theta.*w;
+
 %%
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 for e=1:804
@@ -62,27 +66,44 @@ ErrorPromedio(Prueba,PruebaBS)
 % Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
 for i=1:5
     for k=1:size(r,1)  %CAMBIAR ESTO A SIZE(r,2) PARA CODIGO COMPLETO
-        ValueMMA(k,i)=HestonCallPrice(1,Strike(k,1),r(k,i),q(k,i),Tiempo(k,i),vt,theta,w,sig,rho,psi);
+        ValueMMA(k,i)=HestonCallPrice(1,Strike(k,1),r(k,i),q(k,i),...
+            Tiempo(k,i),vt,theta,w,sig,rho,psi);
         RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
     end
 end
+
+% Diferencia porcentual.
 ErrorMMAHS=abs(ValueMMA./RDiscountNuevos-1);
-ErrorMMAHS=mean2(ErrorMMAHS);
+ErrorMMAHS=ErrorPromedio(ErrorMMAHS,0);
 disp("El error con Heston del MMA es de un: " + ErrorMMAHS*100+"%")
+
 %% Calculos para el Forward.
 % Aca hacer los calculos para el Forward con Heston.
 
-[ValueForward,ValorTeoricoFW] = ForwardHeston(1,Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi);
+% Lo calculamos para distintos Tenores.
+
+[ValueForward,ValorTeoricoFW] = ForwardHeston(1,Spot,Strike,r,q,...
+    Tiempo,vt,theta,w,sig,rho,psi);
+
+% Calculamos el Error.
 ErrorFWHS=ErrorPromedio(ValueForward,ValorTeoricoFW);
 ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFW);
 disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
+
 %% Agregamos las Volatilidades.
 % Aca ya no se que poner si te soy sincero.
-[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,vt, theta,w,sig,rho,psi);
+
+% Lo calculamos en cada volatilidad para todos los tenores.
+
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,...
+    Tiempo,vt,theta,w,sig,rho,psi);
+
+% Calculamos el Error.
 
 ErrorHSBS=ErrorPromedio(ValueHSBS,ValorTeoricoHSBS);
 ErrorHSBS=ErrorHSBS/ErrorPromedio(0,ValorTeoricoHSBS);
 disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
+
 %% Calculo con Heston de Volatilidad Implicita.
 % Aca deberiamos usar Newton Raphson.
 

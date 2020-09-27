@@ -5,6 +5,7 @@ clear
 clear ALL
 rng(2);
 %Secciones del codigo.
+
 %% Primera Seccion.
 % Carga de los datos.
 [Spot,RDiscount,QDiscount,Forward,Sigma,SigmaRR,Strike,T,OptionValue ...
@@ -18,6 +19,7 @@ SigmaRR=SigmaRR/100;
 Strike(1,:)=[];
 % Eliminamos primera fila.
 OptionValue(1,:)=[];
+
 %% Segunda Seccion.
 % Transformacion de algunos datos y otros procesos
 % respectivos.
@@ -27,6 +29,7 @@ for i=1:size(T,1)
         Tiempo(i,k)=T(i,k)/T(i,5);
     end
 end
+
 %% Tercera Seccion.
 % Hacemos el calculo del Forward.
 % Pasamos el factor de descuento a la tasa domestica.
@@ -38,6 +41,7 @@ ForwardEmpirico=ForwardEmpirico(Spot,r,q,T);
 % Calculamos el error entre el Forward obtenido empiricamente y aquel
 % otorgado por el Dataset.
 ForwardError=abs(ForwardEmpirico-Forward);
+
 %% Cuarta Seccion.
 % Obtenemos los pilares.
 Pilares=[0.9 0.75 0.5 0.75 0.9];
@@ -47,6 +51,7 @@ e=1;
 StrikesEmpiricos=StrikesEmpiricos(Spot,r,q,Pilares,Tiempo,Sigma,e);
 % Calculamos el error a los Strike Empiricos.
 ErrorStrike=abs(StrikesEmpiricos-Strike);
+
 %% Quinta Seccion.
 % Calculamos los valores de las opciones utilizando la formula de ValueBS,
 % que nos entrega multiples valores útiles.
@@ -69,22 +74,28 @@ Value12M=BlackScholes(1.*ones(804,5), Spot.*ones(804,5)...
 %Juntamos y calculamos error.
 ValoresEmpiricos=[Value1M Value3M Value6M Value9M Value12M];
 ErrorValores=abs(ValoresEmpiricos-OptionValue);
+
 %% Sexta Seccion.
 % Comprobamos las volatilidades RR y BFY.
 
 for w=0:4
     for k=1:size(SigmaRR,1)
-       SigmaNuevo(k,4+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,3+w*5)+SigmaRR(k,2+w*5)./2;%#ok<*SAGROW> %Sigma put
-       SigmaNuevo(k,2+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,3+w*5)-SigmaRR(k,2+w*5)./2;%Sigma call
+       SigmaNuevo(k,4+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,3+w*5)...
+           +SigmaRR(k,2+w*5)./2;%#ok<*SAGROW> %Sigma put
+       SigmaNuevo(k,2+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,3+w*5)...
+           -SigmaRR(k,2+w*5)./2;%Sigma call
        SigmaNuevo(k,3+w*5)=SigmaRR(k,1+w*5);
-       SigmaNuevo(k,5+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,5+w*5)+SigmaRR(k,4+w*5)./2;%Sigma put
-       SigmaNuevo(k,1+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,5+w*5)-SigmaRR(k,4+w*5)./2; %Sigma call
+       SigmaNuevo(k,5+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,5+w*5)...
+           +SigmaRR(k,4+w*5)./2;%Sigma put
+       SigmaNuevo(k,1+w*5)=SigmaRR(k,1+w*5)+SigmaRR(k,5+w*5)...
+           -SigmaRR(k,4+w*5)./2; %Sigma call
     end
 end
 
 % Error de los Sigmas Respectivos.
 ErrorSigma=abs(SigmaNuevo-Sigma);
 % Butterfly estan en ForwardEmpirico comentado como Deadcode.
+
 %% Septima Seccion.
 % Comprobamos que Monte-Carlo funcione con el MMA.
 M=10;
@@ -92,14 +103,15 @@ M=10;
 N=10000;
 for i=1:5
     for k=1:size(r,1)  %CAMBIAR ESTO A SIZE(r,2) PARA CODIGO COMPLETO
-        ValueMMA(k,i)=getMonteCarlos(1,Spot(k,1),0, r(k,i), q(k,i),0, Tiempo(k,i),M,N,'MMA');
+        ValueMMA(k,i)=getMonteCarlos(1,Spot(k,1),0, r(k,i), q(k,i),...
+            0, Tiempo(k,i),M,N,'MMA');
         RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
     end
 end
 
 % Diferencia porcentual.
 ErrorMC=abs(ValueMMA./RDiscountNuevos-1);
-ErrorMC=mean(mean(abs(ErrorMC))); %AJUSTAR RDISCOUNT PARA EL ERROR
+ErrorMC=ErrorPromedio(ErrorMC,0); %AJUSTAR RDISCOUNT PARA EL ERROR
 disp("El error con Monte-Carlos del MMA es de un "+ ErrorMC*100+"%")
 
 [PorcentajeMMA,PorcentajesMMA,LimiteInferiorMMA,LimiteSuperiorMMA,contadoresMMA]=...
@@ -116,8 +128,8 @@ N=1000;
 [ValueForward,ValorTeoricoFW]=ForwardMontecarlo(e,Spot,Strike,r,q,Tiempo,M,N);
 
 % Calculamos el Error.
-ErrorFW=mean2(abs(ValueForward-ValorTeoricoFW));
-ErrorFW=ErrorFW/mean2(abs(ValorTeoricoFW));
+ErrorFW=ErrorPromedio(ValueForward,ValorTeoricoFW);
+ErrorFW=ErrorFW/ErrorPromedio(ValorTeoricoFW,0);
 disp("El error con Monte-Carlos del Forward es de un: " + ErrorFW*100+"%")
 
 [PorcentajeFWMC,PorcentajesFWMC,LimiteInferiorFWMC,LimiteSuperiorFWMC,contadoresFWMC]=...
@@ -129,16 +141,19 @@ N=52;
 M=10000;                        
 
 % Lo calculamos en cada volatilidad para todos los tenores.
-[ValueMCBS,ValorTeoricoMCBS]=BSMontecarloTenor(e,Spot,Strike,r,q,Tiempo,M,N);
+[ValueMCBS,ValorTeoricoMCBS]=BSMontecarloTenor(e,Spot,Strike,r,q,...
+    Tiempo,M,N);
 
 % Calculamos el Error.
-ErrorMCBS=mean2(abs(ValueMCBS-ValorTeoricoMCBS));
-ErrorMCBS=ErrorMCBS/mean2(abs(ValorTeoricoMCBS));
-disp("El error con Monte-Carlos de Black-Scholes es de un: " + ErrorMCBS*100+"%")
+ErrorMCBS=ErrorPromedio(ValueMCBS,ValorTeoricoMCBS);
+ErrorMCBS=ErrorMCBS/ErrorPromedio(ValorTeoricoMCBS,0);
+disp("El error con Monte-Carlos de Black-Scholes es de un: " ...
+    + ErrorMCBS*100+"%")
 
 %% Decima Seccion.
 % Calculo de la volatilidad implicita.
-[ValoresObtenidos,SigmasObtenidos]=VolImpMC(Spot,r,q,Tiempo,Strike,ValorTeoricoMCBS,e);
+[ValoresObtenidos,SigmasObtenidos]=VolImpMC(Spot,r,q,...
+    Tiempo,Strike,ValorTeoricoMCBS,e);
 
 %% Decimoprimera Seccion.
 % Continuacion con el proyecto.
