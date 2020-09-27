@@ -1,4 +1,5 @@
-function [ValueHSBS,ValorTeoricoHSBS] = BSHestonTenor(e,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi)
+function [ValueHSBS,ValorTeoricoHSBS] = BSHestonTenor(e,Spot,Strike,r,q,...
+    Tiempo,theta,w,sig,rho,psi)
 %Calcula montecarlo para el primer tenor y todos los sigma, ordenados en
 %primera instancia por los 5 Tenores para un sigma fijo y luego cambiando
 %de sigma para la siguiente iteracion.
