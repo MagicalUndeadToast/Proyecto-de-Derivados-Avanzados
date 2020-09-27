@@ -67,13 +67,16 @@ for i=1:5
     end
 end
 
-ErrorPromedio(ValueMMA, RDiscountNuevos)
+ErrorMMAHS=ErrorPromedio(ValueMMA, RDiscountNuevos);
+ErrorMMAHS=ErrorMMAHS/ErrorPromedio(0,RDiscountNuevos);
+disp("El error con Heston del Forward es de un: " + ErrorMMAHS*100+"%")
 %% Calculos para el Forward.
 % Aca hacer los calculos para el Forward con Heston.
 
 [ValueForward,ValorTeoricoFW] = ForwardHeston(1,Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi);
-ErrorPromedio(ValueForward,ValorTeoricoFW)
-
+ErrorFWHS=ErrorPromedio(ValueForward,ValorTeoricoFW);
+ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFW);
+disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 %% Agregamos las Volatilidades.
 % Aca ya no se que poner si te soy sincero.
 [ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,Tiempo,theta,w,sig,rho,psi);
