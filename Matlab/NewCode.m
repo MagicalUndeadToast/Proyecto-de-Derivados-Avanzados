@@ -82,16 +82,16 @@ disp("El error con Heston del MMA es de un: " + ErrorMMAHS*100+"%")
 
 % Lo calculamos para distintos Tenores.
 
-[ValueForward,ValorTeoricoFW] = ForwardHeston(1,Spot,Strike,r,q,...
+[ValueForwardHS,ValorTeoricoFWHS] = ForwardHeston(1,Spot,Strike,r,q,...
     Tiempo,vt,theta,w,sig,rho,psi);
 
 % Calculamos el Error.
-ErrorFWHS=ErrorPromedio(ValueForward,ValorTeoricoFW);
-ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFW);
+ErrorFWHS=ErrorPromedio(ValueForward,ValorTeoricoFWHS);
+ErrorFWHS=ErrorFWHS/ErrorPromedio(0,ValorTeoricoFWHS);
 disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 
-[PorcentajeFWMC,PorcentajesFWMC,LimiteInferiorFWMC,LimiteSuperiorFWMC,contadoresFWMC]=...
-    IntervaloDeConfianza(ValorTeoricoFW,ValueForward);
+[PorcentajeFWHS,PorcentajesFWHS,LimiteInferiorFWHS,LimiteSuperiorFWHS,contadoresFWHS]=...
+    IntervaloDeConfianza(ValorTeoricoFWHS,ValueForwardHS);
 
 %% Agregamos las Volatilidades.
 % Aca ya no se que poner si te soy sincero.
@@ -106,8 +106,6 @@ disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 ErrorHSBS=ErrorPromedio(ValueHSBS,ValorTeoricoHSBS);
 ErrorHSBS=ErrorHSBS/ErrorPromedio(0,ValorTeoricoHSBS);
 disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
-
-
 
 %% Calculo con Heston de Volatilidad Implicita.
 % Aca deberiamos usar Newton Raphson.
