@@ -1,4 +1,4 @@
-function [C] = HestonCallPrice(Spot,Strike,r,q,T,vt,theta,w,sig,rho,psi)
+function [C] = HestonCallPrice(Spot,Strike,r,q,Tiempo,vt,theta,w,sig,rho,psi)
 %Funcion que computa el precio de la opcion a partir de la formula cerrada
 %de Heston.
 %   A partir de los argumentos ingresados, esta función regresa el precio
@@ -27,9 +27,9 @@ phi=(eps:dphi:maxphi)';
 % las operaciones matriciales y en aquellas elemento a elemento que luego
 % no coinciden con el resto de las otras.
 
-f1 = CF_SVj(log(Spot),vt,T,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
+f1 = CF_SVj(log(Spot),vt,Tiempo,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
 P1 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f1./(1i*phi))*dphi);
-f2 = CF_SVj(log(Spot),vt,T,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
+f2 = CF_SVj(log(Spot),vt,Tiempo,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
 P2 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f2./(1i*phi))*dphi);
 
 if(log(Spot)==0)
@@ -39,6 +39,7 @@ elseif(vt==0)
 else
     C = Spot*exp(-q*T)*P1 -Strike*exp(-r*T)*P2;
 end
+
 
 end
 
