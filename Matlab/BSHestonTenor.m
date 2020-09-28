@@ -1,5 +1,5 @@
 function [ValueHSBS,ValorTeoricoHSBS] = BSHestonTenor(e,Spot,Strike,r,q,...
-    Tiempo,vt,theta,w,sig,rho,psi)
+    Tiempo,vt,theta,w,sig,rho,psi) %#ok<INUSL>
 %Calcula montecarlo para el primer tenor y todos los sigma, ordenados en
 %primera instancia por los 5 Tenores para un sigma fijo y luego cambiando
 %de sigma para la siguiente iteracion.
@@ -8,7 +8,7 @@ function [ValueHSBS,ValorTeoricoHSBS] = BSHestonTenor(e,Spot,Strike,r,q,...
 
 % Partimos con un sigma de 0.05.
 SigmaHSBS=0.05;
-vt=SigmaHSBS;
+vt=SigmaHSBS^2;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     ValueHSBS(k,1)=HestonCallPrice(Spot(k,1),Strike(k,1),...
@@ -48,7 +48,7 @@ end
 
 % Ahora cambiamos a una volatilidad de 0.1.
 SigmaHSBS=0.1;
-vt=SigmaHSBS;
+vt=SigmaHSBS^2;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     ValueHSBS(k,6)=HestonCallPrice(Spot(k,1),Strike(k,1),...
@@ -88,7 +88,7 @@ end
 
 % Ahora cambiamos a una volatilidad de 0.2.
 SigmaHSBS=0.2;
-vt=SigmaHSBS;
+vt=SigmaHSBS^2;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     ValueHSBS(k,11)=HestonCallPrice(Spot(k,1),Strike(k,1),...
@@ -127,7 +127,7 @@ end
 
 
 % Ahora cambiamos a una volatilidad de 0.5.
-SigmaHSBS=0.5;
+SigmaHSBS=0.5^2;
 vt=SigmaHSBS;
 % Tenor de 1 mes.
 for k=1:size(r,1)
