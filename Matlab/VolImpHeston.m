@@ -5,17 +5,12 @@ function [ValoresObtenidosHS,SigmasObtenidosHS] = VolImpHeston(Spot,r,q,Tiempo,S
 %   visualmente el main asi como hacer pruebas menores con el codigo.
 
 % % Indicamos el Accuracy para todo el documento.
-% <<<<<<< Updated upstream
-% Accuracy=0.001;
-% 
-% % Partimos con un sigma de 0.05.
-% % SigmaMCBS=0.15;
-% =======
+
 Accuracy=0.1/10;
 
 % Partimos con un sigma de 0.05.
 SigmaMCBS=0.05;
-% >>>>>>> Stashed changes
+
 % Tenor de 1 mes.
 for k=1:size(r,1)
     [ValoresObtenidosHS(k,1), SigmasObtenidosHS(k,1)]=VolBS2(Spot(k,1),r(k,1)...
