@@ -44,9 +44,8 @@ theta=0.015;
 w=0.01;
 sig=0.25;
 rho=0.05;
-
-
 psi=theta.*w;
+
 
 %%
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
@@ -110,10 +109,14 @@ disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
 
 [ValoresObtenidosHeston,SigmasObtenidosHeston]=VolImpHeston(Spot,r,q,Tiempo,Strike,ValueHSBS,1);
 
+
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
 % simulacion de nuevo.
 % Abrir una funcion open('').
+plot(normalize(Strike(:,1)),SigmasObtenidosHeston(:,1),'o')
+xlabel('Strike'), ylabel('Volatilidad implicita'), title('Smile')
+
 
 %%
 
