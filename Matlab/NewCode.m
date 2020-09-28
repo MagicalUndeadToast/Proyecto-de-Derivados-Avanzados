@@ -118,10 +118,59 @@ plot(normalize(Strike(:,1)),SigmasObtenidosHeston(:,1),'o')
 xlabel('Strike'), ylabel('Volatilidad implicita'), title('Smile')
 
 
-%%
+%% Step 8
+%Calculamos los valores de 3M ATM con MC y Heston.
+
+M=10000;
+N=66;
+
+%Parametros Heston
+vt=0.01;
+theta=0.015;
+w=0.01;
+sig=0.25;
+rho=0.05;
+psi=theta.*w;
+
+tic
+for e=1:size(Spot,1)
+    MC8(e,1)=getMonteCarlos(1,Spot(e,1),Strike(e,8), r(e,2), ...
+        q(e,2),Sigma(e,8), Tiempo(e,2),M,N,"other");
+end
+toc
+
+tic
+for e=1:size(Spot,1)
+    Heston8(e,1)=HestonCallPrice(Spot(e,1),Strike(e,8),r(e,2),q(e,2),...
+        Tiempo(e,2),vt,theta,w,sig,rho,psi);
+end
+toc
+
+%% Step 8
+% Calculamos la volatilidad implicita para ambos modelos
+SigmaMCBS=0.15;
+Accuracy=0.001;
+
+tic
+for k=1:size(r,1)
+    [ValoresMC8(k,1), VolMC8(k,1),StepMC(k,1)]=VolBS2(Spot(k,1),r(k,2)...
+        ,q(k,2),Tiempo(k,2),Strike(k,8),MC8(k,1),SigmaMCBS...
+        ,Accuracy,1);
+end
+toc
+
+tic
+for k=1:size(r,1)
+    [ValoresHeston8(k,1), VolHeston8(k,1),StepHeston(k,1)]=VolBS2(Spot(k,1),r(k,2)...
+        ,q(k,2),Tiempo(k,2),Strike(k,8),Heston8(k,1),SigmaMCBS...
+        ,Accuracy,1);
+end
+toc
+
+disp("Los steps con Monte-Carlo son: "+sum(StepMC))
+disp("Los steps con Heston son: "+sum(StepHeston))
 
 
-
-
-
+disp("El error promedio con Monte-Carlo es: "+ ErrorPromedio(VolMC8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0)*100+"%")
+disp("El error promedio con Heston es: "+ ErrorPromedio(VolHeston8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0)*100+"%")
 
