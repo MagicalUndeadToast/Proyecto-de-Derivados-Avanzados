@@ -4,18 +4,11 @@ function [ValoresObtenidosHS,SigmasObtenidosHS] = VolImpHeston(Spot,r,q,Tiempo,S
 %   Esta funcion nos permite identificar errores, no sobrecargar
 %   visualmente el main asi como hacer pruebas menores con el codigo.
 
-% % Indicamos el Accuracy para todo el documento.
-% <<<<<<< Updated upstream
-% Accuracy=0.001;
-% 
-% % Partimos con un sigma de 0.05.
-% % SigmaMCBS=0.15;
-% =======
-Accuracy=0.1/10;
+% Indicamos el Accuracy para todo el documento.
+Accuracy=0.1/100;
 
 % Partimos con un sigma de 0.05.
-SigmaMCBS=0.05;
-% >>>>>>> Stashed changes
+SigmaMCBS=0.2;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     [ValoresObtenidosHS(k,1), SigmasObtenidosHS(k,1)]=VolBS2(Spot(k,1),r(k,1)...
@@ -48,8 +41,6 @@ for k=1:size(r,1)
 end
 % Seguimos con un sigma de 0.1.
 %SigmaMCBS=0.1;
-Accuracy=0.1/10;
-SigmaMCBS=0.1;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     [ValoresObtenidosHS(k,6), SigmasObtenidosHS(k,6)]=VolBS2(Spot(k,1),r(k,1)...
@@ -82,8 +73,6 @@ for k=1:size(r,1)
 end
 % Seguimos con un sigma de 0.2.
 %SigmaMCBS=0.2;
-Accuracy=0.1/100;
-SigmaMCBS=0.2;
 % Tenor de 1 mes.
 for k=1:size(r,1)
     [ValoresObtenidosHS(k,11), SigmasObtenidosHS(k,11)]=VolBS2(Spot(k,1),r(k,1)...
