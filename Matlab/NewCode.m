@@ -40,10 +40,10 @@ q=log(QDiscount)./(-T);
 %% New Code Section.
 % Nueva seccion de codigo.
 vt=0.01;
-theta=0;
-w=0;
-sig=0.01;
-rho=0;
+theta=0.015;
+w=0.01;
+sig=0.25;
+rho=0.05;
 
 
 psi=theta.*w;
