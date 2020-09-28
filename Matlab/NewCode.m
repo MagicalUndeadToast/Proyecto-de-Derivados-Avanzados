@@ -60,9 +60,6 @@ end
 
 ErrorPromedio(Prueba,PruebaBS)
 
-
-
-
 %% MMA Section Code.
 % Actualizar esta seccion cuando se nos ocurra como hacer la MMA.
 for i=1:5
