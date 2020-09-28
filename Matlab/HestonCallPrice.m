@@ -34,7 +34,7 @@ P2 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f2./(1i*phi))*dphi);
 
 if(log(Spot)==0)
     C=Spot*exp(-r*Tiempo);
-elseif(vt==0)
+elseif(vt==(-10))
     C= max(Spot.*exp(-q.*Tiempo)-Strike.*exp(-r.*Tiempo),0);
 else
     C = Spot*exp(-q*Tiempo)*P1 -Strike*exp(-r*Tiempo)*P2;
