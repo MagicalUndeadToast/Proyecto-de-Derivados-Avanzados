@@ -11,7 +11,6 @@ while (abs(sigma-psigma))>accuracy
     [fairvalue,vega]=ValueBS(Spot,Strike,r,q,Tiempo,sigma,e);
     steps=steps+1;
 end
-
 error=abs(psigma-sigma);
 end
 

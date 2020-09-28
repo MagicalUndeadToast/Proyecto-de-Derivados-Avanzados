@@ -184,7 +184,7 @@ disp("El error con Heston del MMA es de un: " + ErrorMMAHS*100+"%")
 
 % Lo calculamos para distintos Tenores.
 
-[ValueForwardHS,ValorTeoricoFWHS] = ForwardHeston(1,Spot,Strike,r,q,...
+[ValueForwardHS,ValorTeoricoFWHS] = ForwardHeston(e,Spot,Strike,r,q,...
     Tiempo,vt,theta,w,sig,rho,psi);
 
 % Calculamos el Error.
@@ -200,7 +200,7 @@ disp("El error con Heston del Forward es de un: " + ErrorFWHS*100+"%")
 
 % Lo calculamos en cada volatilidad para todos los tenores.
 
-[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(1,Spot,Strike,r,q,...
+[ValueHSBS,ValorTeoricoHSBS]=BSHestonTenor(e,Spot,Strike,r,q,...
     Tiempo,vt,theta,w,sig,rho,psi);
 
 % Calculamos el Error.
@@ -211,18 +211,43 @@ disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
 
 %% Decimoquinta Seccion.
 % Calculo para la volatilidad implicita con Heston.
-
 [ValoresObtenidosHeston,SigmasObtenidosHeston]=VolImpHeston(Spot,r,q,...
-    Tiempo,Strike,ValueHSBS,1);
+    Tiempo,Strike,ValueHSBS,e);
 
 %% Decimosexta Seccion.
-% 
+% Heston versus Monte-Carlo ATM 3 meses.
+M=10000;
+N=66;
+
+% Calculamos primero
+
+[MC8,Heston8] = HSMCFairValue(M,N,e,Spot,Strike,r,q,...
+    Sigma,Tiempo,vt,theta,w,sig,rho,psi);
+
+SigmaMCBS=0.15;
+Accuracy=0.001;
+
+[ValoresMC8, VolMC8,StepMC,ValoresHeston8,...
+    VolHeston8,StepHeston] = HSMCVolImp(Spot,r,q,...
+        Tiempo,Strike,MC8,Heston8,SigmaMCBS...
+        ,Accuracy,e);
+
+disp("El total de steps con Monte-Carlo es: "+sum(StepMC))
+disp("El total de steps con Heston es: "+sum(StepHeston))
+
+ErrorHSVSMCMC=ErrorPromedio(VolMC8,Sigma(:,8))...
+    /ErrorPromedio(Sigma(:,8),0);
+ErrorHSVSMCHS=ErrorPromedio(VolHeston8,Sigma(:,8))...
+    /ErrorPromedio(Sigma(:,8),0);
+disp("El error promedio con Monte-Carlo es de un: "+ ErrorHSVSMCMC*100+"%")
+disp("El error promedio con Heston es de un: "+ ErrorHSVSMCHS*100+"%")
+
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
 % simulacion de nuevo.
 % Abrir una funcion open('').
 
-plot(normalize(Strike(:,1)),SigmasObtenidos(:,1),'o')
-xlabel('Strike'), ylabel('Volatilidad implicita'), title('Smile')
+% plot(normalize(Strike(:,1)),SigmasObtenidos(:,1),'o')
+% xlabel('Strike'), ylabel('Volatilidad implicita'), title('Smile')
 %%
 

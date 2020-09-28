@@ -133,16 +133,16 @@ rho=0.05;
 psi=theta.*w;
 
 tic
-for e=1:size(Spot,1)
-    MC8(e,1)=getMonteCarlos(1,Spot(e,1),Strike(e,8), r(e,2), ...
-        q(e,2),Sigma(e,8), Tiempo(e,2),M,N,"other");
+for k=1:size(Spot,1)
+    MC8(k,1)=getMonteCarlos(1,Spot(k,1),Strike(k,8), r(k,2), ...
+        q(k,2),Sigma(k,8), Tiempo(k,2),M,N,"other");
 end
 toc
 
 tic
-for e=1:size(Spot,1)
-    Heston8(e,1)=HestonCallPrice(Spot(e,1),Strike(e,8),r(e,2),q(e,2),...
-        Tiempo(e,2),vt,theta,w,sig,rho,psi);
+for k=1:size(Spot,1)
+    Heston8(k,1)=HestonCallPrice(Spot(k,1),Strike(k,8),r(k,2),q(k,2),...
+        Tiempo(k,2),vt,theta,w,sig,rho,psi);
 end
 toc
 
@@ -170,7 +170,8 @@ toc
 disp("Los steps con Monte-Carlo son: "+sum(StepMC))
 disp("Los steps con Heston son: "+sum(StepHeston))
 
-
-disp("El error promedio con Monte-Carlo es: "+ ErrorPromedio(VolMC8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0)*100+"%")
-disp("El error promedio con Heston es: "+ ErrorPromedio(VolHeston8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0)*100+"%")
+ErrorHSVSMCMC=ErrorPromedio(VolMC8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0);
+ErrorHSVSMCHS=ErrorPromedio(VolHeston8,Sigma(:,8))/ErrorPromedio(Sigma(:,8),0);
+disp("El error promedio con Monte-Carlo es: "+ ErrorHSVSMCMC*100+"%")
+disp("El error promedio con Heston es: "+ ErrorHSVSMCHS*100+"%")
 

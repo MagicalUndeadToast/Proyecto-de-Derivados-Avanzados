@@ -211,14 +211,41 @@ disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
 
 %% Decimoquinta Seccion.
 % Calculo para la volatilidad implicita con Heston.
-
 [ValoresObtenidosHeston,SigmasObtenidosHeston]=VolImpHeston(Spot,r,q,...
     Tiempo,Strike,ValueHSBS,e);
 
 %% Decimosexta Seccion.
 % Heston versus Monte-Carlo ATM 3 meses.
+M=10000;
+N=66;
 
+% Calculamos primero los FairValue.
 
+[MC8,Heston8] = HSMCFairValue(M,N,e,Spot,Strike,r,q,...
+    Sigma,Tiempo,vt,theta,w,sig,rho,psi);
+
+% Ahora calculamos la Volatilidad Implicita.
+
+SigmaMCBS=0.15;
+Accuracy=0.001;
+
+[ValoresMC8, VolMC8,StepMC,ValoresHeston8,...
+    VolHeston8,StepHeston] = HSMCVolImp(Spot,r,q,...
+        Tiempo,Strike,MC8,Heston8,SigmaMCBS...
+        ,Accuracy,e);
+
+disp("El total de steps con Monte-Carlo es: "+sum(StepMC))
+disp("El total de steps con Heston es: "+sum(StepHeston))
+
+% Calculamos el Error.
+
+ErrorHSVSMCMC=ErrorPromedio(VolMC8,Sigma(:,8))...
+    /ErrorPromedio(Sigma(:,8),0);
+ErrorHSVSMCHS=ErrorPromedio(VolHeston8,Sigma(:,8))...
+    /ErrorPromedio(Sigma(:,8),0);
+
+disp("El error promedio con Monte-Carlo es de un: "+ ErrorHSVSMCMC*100+"%")
+disp("El error promedio con Heston es de un: "+ ErrorHSVSMCHS*100+"%")
 
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
