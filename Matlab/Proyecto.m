@@ -162,6 +162,7 @@ ErrorSigmaMC=ErrorPromedio(SigmasObtenidos,SigmasTeoricos);
 ErrorSigmaMC=ErrorSigmaMC/ErrorPromedio(SigmasTeoricos,0);
 disp("El error de las volatilidades implicita con Monte-Carlo es de un: " +...
     ErrorSigmaMC*100 +"%")
+disp(" ")
 
 %% Decimoprimera Seccion.
 % Parametros utilizados globalmente para Heston (Actualmente).
@@ -228,9 +229,9 @@ SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5
 ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston);
 ErrorSigmasHeston=ErrorSigmasHeston/ErrorPromedio(SigmasTeoricos,0);
 
-disp("El error promedio entre los volatildiad teoricas e implicitas es de un: "...
+disp("El error promedio entre los volatildiad teoricas e implicitas para Heston es de un: "...
     + ErrorSigmasHeston*100+"%")
-
+disp(" ")
 
 %% Decimosexta Seccion.
 % Heston versus Monte-Carlo ATM 3 meses.
@@ -257,8 +258,8 @@ disp("El total de steps con Monte-Carlo es: "+sum(StepMC))
 disp("El total de steps con Heston es: "+sum(StepHeston))
 disp(" ")
 
-% Calculamos el Error.
-%Error volatilidades
+% Calculamos el Error de las Volatilidades.
+
 ErrorHSVSMCMC=ErrorPromedio(VolMC8,Sigma(:,8))...
     /ErrorPromedio(Sigma(:,8),0);
 ErrorHSVSMCHS=ErrorPromedio(VolHeston8,Sigma(:,8))...
@@ -270,11 +271,16 @@ ErrorBSMC=ErrorPromedio(MC8,BSValue8)...
 ErrorBSHeston=ErrorPromedio(Heston8,BSValue8)...
     /ErrorPromedio(BSValue8,0);
 
-disp("El error promedio de la volatilidad con Monte-Carlo es de un: "+ ErrorHSVSMCMC*100+"%")
-disp("El error promedio de la volatilidad con Heston es de un: "+ ErrorHSVSMCHS*100+"%")
+disp("El error promedio de la volatilidad con Monte-Carlo es de un: "...
+    + ErrorHSVSMCMC*100+"%")
+disp("El error promedio de la volatilidad con Heston es de un: "...
+    + ErrorHSVSMCHS*100+"%")
 disp(" ")
-disp("El error promedio del fair value entre BS y Monte-Carlo es de un: "+ ErrorBSMC*100+"%")
-disp("El error promedio del fair value entre BS y Heston es de un: "+ ErrorBSHeston*100+"%")
+
+disp("El error promedio del fair value entre BS y Monte-Carlo es de un: "...
+    + ErrorBSMC*100+"%")
+disp("El error promedio del fair value entre BS y Heston es de un: "...
+    + ErrorBSHeston*100+"%")
 
 %% Espacio de Calculo.
 % Espacio para hacer calculos en el programa sin tener que correr la
