@@ -225,8 +225,8 @@ SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5
 
 % Calculamos el Error de las Volatilidades Implicitas.
 
-ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston)...
-    /ErrorPromedio(SigmasTeoricos,0);
+ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston);
+ErrorSigmasHeston=ErrorSigmasHeston/ErrorPromedio(SigmasTeoricos,0);
 
 disp("El error promedio entre los volatildiad teoricas e implicitas es de un: "...
     + ErrorSigmasHeston*100+"%")
