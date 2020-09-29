@@ -155,9 +155,13 @@ disp("El error con Monte-Carlos de Black-Scholes es de un: " ...
 [ValoresObtenidos,SigmasObtenidos]=VolImpMC(Spot,r,q,...
     Tiempo,Strike,ValorTeoricoMCBS,e);
 SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5)];
+
+% Calculamos el Error de las Volatilidades Implicitas.
+
 ErrorSigmaMC=ErrorPromedio(SigmasObtenidos,SigmasTeoricos);
 ErrorSigmaMC=ErrorSigmaMC/ErrorPromedio(SigmasTeoricos,0);
-disp("El error de las volatilidades implicita con Monte-Carlo es de un: " + ErrorSigmaMC*100 +"%")
+disp("El error de las volatilidades implicita con Monte-Carlo es de un: " +...
+    ErrorSigmaMC*100 +"%")
 
 %% Decimoprimera Seccion.
 % Parametros utilizados globalmente para Heston (Actualmente).
@@ -218,10 +222,14 @@ disp("El error con Heston de Black-Scholes es de un: " + ErrorHSBS*100+"%")
 [ValoresObtenidosHeston,SigmasObtenidosHeston]=VolImpHeston(Spot,r,q,...
     Tiempo,Strike,ValueHSBS,e);
 SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5)];
-ErrorSigmas=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston)...
+
+% Calculamos el Error de las Volatilidades Implicitas.
+
+ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston)...
     /ErrorPromedio(SigmasTeoricos,0);
 
-disp("El error promedio entre los volatildiad teoricas e implicitas es de un: " + ErrorSigmas*100+"%")
+disp("El error promedio entre los volatildiad teoricas e implicitas es de un: "...
+    + ErrorSigmasHeston*100+"%")
 
 
 %% Decimosexta Seccion.
