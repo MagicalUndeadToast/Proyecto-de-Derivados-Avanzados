@@ -225,8 +225,8 @@ SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5
 
 % Calculamos el Error de las Volatilidades Implicitas.
 
-ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston);
-ErrorSigmasHeston=ErrorSigmasHeston/ErrorPromedio(SigmasTeoricos,0);
+ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston)...
+    /ErrorPromedio(SigmasTeoricos,0);
 
 disp("El error promedio entre los volatildiad teoricas e implicitas es de un: "...
     + ErrorSigmasHeston*100+"%")
@@ -255,7 +255,6 @@ Accuracy=0.001;
 
 disp("El total de steps con Monte-Carlo es: "+sum(StepMC))
 disp("El total de steps con Heston es: "+sum(StepHeston))
-disp(" ")
 
 % Calculamos el Error.
 %Error volatilidades
@@ -272,7 +271,6 @@ ErrorBSHeston=ErrorPromedio(Heston8,BSValue8)...
 
 disp("El error promedio de la volatilidad con Monte-Carlo es de un: "+ ErrorHSVSMCMC*100+"%")
 disp("El error promedio de la volatilidad con Heston es de un: "+ ErrorHSVSMCHS*100+"%")
-disp(" ")
 disp("El error promedio del fair value entre BS y Monte-Carlo es de un: "+ ErrorBSMC*100+"%")
 disp("El error promedio del fair value entre BS y Heston es de un: "+ ErrorBSHeston*100+"%")
 
