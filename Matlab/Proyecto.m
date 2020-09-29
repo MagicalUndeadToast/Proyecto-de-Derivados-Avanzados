@@ -160,7 +160,7 @@ SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5
 
 ErrorSigmaMC=ErrorPromedio(SigmasObtenidos,SigmasTeoricos);
 ErrorSigmaMC=ErrorSigmaMC/ErrorPromedio(SigmasTeoricos,0);
-disp("El error de las volatilidades implicita con Monte-Carlo es de un: " +...
+disp("El error de las volatilidades implicitas con Monte-Carlos es de un: " +...
     ErrorSigmaMC*100 +"%")
 disp(" ")
 
@@ -177,16 +177,19 @@ psi=theta.*w;
 % Calculo para el MMA con Heston.
 for i=1:5
     for k=1:size(r,1)  %CAMBIAR ESTO A SIZE(r,2) PARA CODIGO COMPLETO
-        ValueMMA(k,i)=HestonCallPrice(1,Strike(k,1),r(k,i),q(k,i),...
+        ValueMMAHS(k,i)=HestonCallPrice(1,Strike(k,1),r(k,i),q(k,i),...
             Tiempo(k,i),vt,theta,w,sig,rho,psi);
-        RDiscountNuevos(k,i)=exp(-r(k,i)*Tiempo(k,i));
+        RDiscountNuevosHS(k,i)=exp(-r(k,i)*Tiempo(k,i));
     end
 end
 
 % Diferencia porcentual.
-ErrorMMAHS=abs(ValueMMA./RDiscountNuevos-1);
+ErrorMMAHS=abs(ValueMMAHS./RDiscountNuevosHS-1);
 ErrorMMAHS=ErrorPromedio(ErrorMMAHS,0);
 disp("El error con Heston del MMA es de un: " + ErrorMMAHS*100+"%")
+
+[PorcentajeMMAHS,PorcentajesMMAHS,LimiteInferiorMMAHS,LimiteSuperiorMMAHS,contadoresMMAHS]=...
+    IntervaloDeConfianza(ValueMMAHS,RDiscountNuevosHS);
 
 %% Decimotercera Seccion.
 % Calculos para el Forward con Heston.
@@ -229,7 +232,7 @@ SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5
 ErrorSigmasHeston=ErrorPromedio(SigmasTeoricos,SigmasObtenidosHeston);
 ErrorSigmasHeston=ErrorSigmasHeston/ErrorPromedio(SigmasTeoricos,0);
 
-disp("El error promedio entre los volatildiad teoricas e implicitas para Heston es de un: "...
+disp("El error de las volatilidades implicitas con Heston es de un: "...
     + ErrorSigmasHeston*100+"%")
 disp(" ")
 
