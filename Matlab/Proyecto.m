@@ -156,7 +156,7 @@ disp("El error con Monte-Carlos de Black-Scholes es de un: " ...
     Tiempo,Strike,ValorTeoricoMCBS,e);
 SigmasTeoricos= [0.05*ones(804,5) 0.1*ones(804,5) 0.2*ones(804,5) 0.5*ones(804,5)];
 ErrorSigmaMC=ErrorPromedio(SigmasObtenidos,SigmasTeoricos);
-ErrorSigmaMC=ErrorMCBS/ErrorPromedio(SigmasTeoricos,0);
+ErrorSigmaMC=ErrorSigmaMC/ErrorPromedio(SigmasTeoricos,0);
 disp("El error de las volatilidades implicita con Monte-Carlo es de un: " + ErrorSigmaMC*100 +"%")
 
 %% Decimoprimera Seccion.
