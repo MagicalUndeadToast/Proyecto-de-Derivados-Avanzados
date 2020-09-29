@@ -247,7 +247,7 @@ BSValue8=BlackScholes(1, Spot, Strike(:,8), q(:,2), r(:,2), Tiempo(:,2), Sigma(:
 % Ahora calculamos la Volatilidad Implicita.
 
 SigmaMCBS=0.15;
-Accuracy=0.003;
+Accuracy=0.002025;
 
 [ValoresMC8, VolMC8,StepMC,ValoresHeston8,...
     VolHeston8,StepHeston] = HSMCVolImp(Spot,r,q,...
