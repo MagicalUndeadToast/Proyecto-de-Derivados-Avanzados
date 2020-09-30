@@ -1,0 +1,67 @@
+\noindent En este paso se desarrollan y se plantean las metodologías y modelos correspondientes al segundo motor de calculo utilizado en este proyecto, correspondiente al modelo de \textit{Heston}, con tal de comparar y contrastar los resultados obtenidos respecto al anterior motor de cálculo. Específicamente fue analizado el modelo de volatilidad estocástica de \textit{Heston}. Dicho modelo supone que el precio del activo (\textit{Spot Price}) $S_t$ esta determinado por un proceso estocástico de la forma: 
+
+\begin{equation}
+    dS_t=\mu \cdot S_t \cdot dt+\sqrt{\nu_t}\cdot S_t \cdot {dW_t}^S
+\end{equation}
+\noindent En donde la varianza instantánea $\nu_t$ esta dado por:
+\begin{equation}
+    d\nu_t=\kappa\cdot (\theta-\nu_t) \cdot dt+\xi \cdot \sqrt{\nu_t}\cdot {dW_t}^\nu
+\end{equation}
+\noindent Para la cual ${dW_t}^S$ y ${dW_t}^\nu$ son procesos de Wiener, los cuales están correlacionados de la siguiente manera:
+\begin{equation}
+    d W_{t}^{S} d W_{ t}^{\nu}=\rho d t
+\end{equation}
+
+\noindent Por otra parte, el modelo de \textit{Heston} consta con una formula cerrada de valorización, la cual permite una mayor facilidad al momento de hacer cálculos computacionales, los cuales se simplifican a la siguiente ecuación:
+
+\begin{equation}
+    C_{0}=S_{0} e^{-q T} P_{1}-K e^{-r T} P_{2}
+\end{equation}
+
+\noindent En la cual $P_1$ y $P_2$ son probabilidades definidas por la forma:
+
+\begin{equation}
+    P_{j}=\frac{1}{2}+\frac{1}{\pi} \int_{\phi=0}^{+\infty} \operatorname{Re}\left\{\frac{e^{-i \phi \ln K} f_{j}\left(\phi \mid x_{0}, \nu_{0}, T\right)}{i \phi}\right\} d \phi
+\end{equation}
+\newpage
+\noindent Con:
+\begin{equation*}
+    f_{j}\left(\phi \mid x_{0}, \nu_{0}, T\right)=\exp \left[C_{j}(\phi \mid T)+D_{j}(\phi \mid T) \nu_{0}+i \phi x_{0}\right]
+\end{equation*}
+\begin{equation*}
+    C_{j}(\phi \mid T)=i \phi(r-q) T+\frac{a}{\xi^{2}}\left[\left(b_{j}-i \phi \rho \xi+d_{j}\right) T-2 \ln \frac{1-g_j e^{d_jT} }{1-g}\right]
+\end{equation*}
+\begin{equation*}
+    D_{j}(\phi \mid T)=\left[\frac{b_j-i \phi \rho \epsilon+d_{j}}{\xi^{2}}\right]\left[\frac{1-e^{d_jT}}{1-g e^{d_jT}}\right]
+\end{equation*}
+\begin{equation*}
+    g(\phi)=\frac{b_{j}-i \phi \rho \xi+d_{j}}{b_{j}-i \phi \rho \epsilon-d_{j}}
+\end{equation*}
+\begin{equation*}
+    d_{j}(\phi)=\sqrt{\left(i \phi \rho \xi-b_{j}\right)^{2}-\xi^{2}\left(2 i \phi u_{j}-\phi^{2}\right)}
+\end{equation*}
+\begin{equation*}
+    u_1=\frac{1}{2}
+\end{equation*}
+\begin{equation*}
+    u_2=-\frac{1}{2}
+\end{equation*}
+\begin{equation*}
+    a=\theta \omega
+\end{equation*}
+\begin{equation*}
+    b_{1}=\theta+\psi-\rho \xi
+\end{equation*}
+\begin{equation*}
+    b_{2}=\theta+\psi
+\end{equation*}
+\begin{equation*}
+    \psi=\theta\left(\omega^{P}-\omega^{Q}\right)
+\end{equation*}
+\begin{equation*}
+    x_{0}=\ln S_{0}
+\end{equation*}
+
+\noindent En donde los parámetros a calibrar son $\nu_0$ (varianza instantánea), $\theta$ (reversión  a la media), $\omega$ (varianza de equilibrio), $\xi$ (volatilidad de la varianza) y $\rho$ (correlación entre los procesos de Wiener).
+
+\newpage

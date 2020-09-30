@@ -1,0 +1,33 @@
+\noindent En este paso, se utilizaron los valores empíricos obtenidos en el \textit{Step} 5 para calcular las volatilidades implícitas de dichos resultados y poder analizar los distintos parámetros que influyen en la curva \textit{Smile}.\\\\
+\noindent Con tal de obtener aquellas volatilidades citadas con anterioridad se utilizó el algoritmo de \textit{Newton-Raphson}, el cual a partir de un $\sigma$ inicial, la fórmula de \textit{Black-Scholes} (\ref{BlackScholes}) y el valor del \textit{Greek Vega}, itera la volatilidad inicial hasta obtener la volatilidad implícita en el modelo. Cabe mencionar que el valor del \textit{Greek Vega} viene dado por la siguiente ecuación:
+\begin{equation}
+       V^{'BS}=\frac{\partial V^{BS}}{\partial \sigma} = S_0 \cdot e^{-qT} \cdot n(d1) \cdot \sqrt{T}
+       \label{vega}
+\end{equation}
+
+\noindent En donde además, las iteraciones de la volatilidad, en cada ciclo del algoritmo de \textit{Newton-Raphson}, vienen determinados por la siguiente ecuación:
+
+\begin{equation}
+    \sigma_{N+1}=\sigma_N + \frac{C_0-V_0(\sigma_N)}{V^{'BS}(\sigma_N)}
+\end{equation}
+
+\noindent Posteriormente, una vez aplicado el algoritmo de \textit{Newton-Raphson} tanto para la simulaciones de \textit{Monte-Carlos} como para el modelo de \textit{Heston}, con una precisión (\textit{Accuracy})  de 10pb, se pudo apreciar que los valores de las volatilidades implícitas obtenidas convergen a valores cercanos a las indicadas en el \textit{Step} 5, es decir, aquellas volatilidades  constantes de 5\%,10\%, 20\% y 50\%.\\\\
+\noindent A continuación se muestra la tabla de errores, donde se puede observar el error porcentual, para cada motor de cálculo, al comparar las volatilidades implícitas con las volatilidades constantes anteriormente mencionadas:\\\\
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| r | l | c |}
+
+\hline   
+Motor de Cálculo & Errores \\ \hline
+Simulaciones de Monte-Carlo &  4.5148\% \\
+Modelo de Heston &  1.4114\% \\ \hline
+\end{tabular}
+\caption{Error de la volatilidad implícita}
+\label{tab:volimplicita}
+\end{center}
+\end{table}
+
+\noindent Finalmente, podemos observar, como el modelo de Heston tiene una mayor precisión al estimar las volatilidades implícitas que existen en el mercado, constando con aproximadamente un 3\% menos de error que el presente en las simulaciones de \textit{Monte-Carlos}.
+
+\newpage

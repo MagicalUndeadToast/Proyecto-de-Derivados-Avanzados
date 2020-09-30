@@ -1,0 +1,21 @@
+\noindent En esta última sección de la \textit{Parte II} del proyecto, se busca comparar las volatilidades implícitas obtenidas a partir del uso del modelo de \textit{Monte-Carlos}, así como de las obtenidas utilizando el modelo de \textit{Heston}, sin embargo, a diferencia de la sección anterior, utilizando las volatilidades del mercado, con el fin de escoger solo uno de estos modelos para realizar la calibración.\\\\
+Como medida de decisión entre los modelos se utilizará la velocidad computacional respecto a una misma función, es decir, la cantidad de pasos que se deba realizar para obtener una precisión deseada en cada modelo. Esto será realizado para el pilar \textit{At The Money ATM} con un \textit{Tenor} de 3 meses, utilizando la información de mercado disponible. Para el modelo de \textit{Heston} se utilizaron los mismos parámetros planteados para los cálculos en el \textit{Step 5}.\\\\
+\noindent En primera instancia, se procedió a calcular los valores de las opciones tanto con el modelo de \textit{Monte-Carlos} como con la fórmula de \textit{Heston}. En el anexo se puede observar una tabla con algunos valores a modo de ejemplo. Luego, mediante el algoritmo de \textit{Newton-Raphson}, y cambiando la precisión a 20pb, por problemas de convergencia, se procedió a calcular las volatilidades implícitas del mercado, buscando similitudes con aquellas entregadas en los datos de mercado. A continuación, se presenta una tabla resumen con el tiempo computacional y el error porcentual de cada uno de los modelos.\\\\
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| r | l | c |}
+\hline 
+Motor de Cálculo & Tiempo computacional & Error \\ \hline
+Simulaciones de Monte-Carlo & 5611 & 20.6442\%  \\
+Modelo de Heston  & 4575 & 29.8921\%\\ \hline
+\end{tabular}
+\caption{Comparación entre los modelos utilizados para los motores de cálculo}
+\label{tab:fruta}
+\end{center}
+\end{table}
+
+\noindent Tal como se puede observar en la tabla, ambos modelos presentan errores elevados, sin embargo, la simulación de \textit{Monte-Carlos} presenta un menor error, pero a costa de necesitar un mayor tiempo computacional. Por otra parte, el modelo de \textit{Heston} presenta un mayor error que el modelo de \textit{Monte-Carlos}, sin embargo, necesitando una cantidad considerablemente menor de tiempo computacional.\\\\
+
+\noindent En vista de esto, hemos elegido el modelo de \textit{Heston}, dado que los resultados hasta el momento parecen satisfactorios, y apuntan a que podría verse una mejora considerable respecto a \textit{Monte-Carlos} una vez el modelo de \textit{Heston} sea calibrado en base a los datos de mercado disponibles.
+\newpage
