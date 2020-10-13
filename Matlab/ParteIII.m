@@ -90,8 +90,3 @@ end
 
 %%
 
-fun = @(x)abs(HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),...
-        q(1,1),Tiempo(1,1),x(1),x(2),x(3),x(4),x(5),x(6))...
-        -OptionValue(1,1)); 
-x0 = [0.2^2, 0.01, 0.01, 0.5,0.05,0.4];
-x = fminsearch(fun,x0)
