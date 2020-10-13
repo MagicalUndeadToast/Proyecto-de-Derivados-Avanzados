@@ -39,7 +39,7 @@ q=log(QDiscount)./(-T);
 
 %% Parametros
 
-vt=0.1^2;
+vt=0.1035^2;
 theta=0.015;
 w=0.01;
 sig=0.1^2;
@@ -54,7 +54,7 @@ for k=1:804
         q(k,1),Tiempo(k,1),vt,theta,w,sig,rho,psi);
     
     [fairvalueHeston(k,1),sigmaHeston(k,1)]=VolBS2(Spot(k,1),r(k,1),q(k,1),Tiempo(k,1),...
-        Strike(k,1),Prueba(k,1),0.1,0.1/100,1);
+        Strike(k,1),Prueba(k,1),0.1,0.1/10,1);
 end
 x=Sigma(:,1);
 ErrorPromedio(Prueba,OptionValue(:,1))
