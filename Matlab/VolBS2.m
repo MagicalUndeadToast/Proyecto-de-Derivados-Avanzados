@@ -12,6 +12,5 @@ while (abs(sigma-psigma))>accuracy
     steps=steps+1;
 end
 error=abs(psigma-sigma);
-
 end
 
