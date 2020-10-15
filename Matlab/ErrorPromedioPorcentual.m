@@ -6,5 +6,6 @@ function [ErrorPromedioPorcentual] = ...
 ErrorPromedioPorcentual=mean2(abs(Empirica-Teorica))...
     /mean2(abs(Teorica));
 ErrorPromedioPorcentual=ErrorPromedioPorcentual*100;
+
 end
 

@@ -55,19 +55,26 @@ psi=theta.*w;
 
 %%
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
-x0 = [0.2^2, 0.01, 0.01, 0.5,0.05];
-for k=1:10
+
+%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+% NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+
+% CALIBRAMOS PARA EL DIA 1
+for k=1:1
 %     fun = @(x)abs(HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
 %         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3))...
 %         -OptionValue(k,1));
-
 %     V0=HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
 %         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3));
 %     
-    fun= @(x)abs(dummyFunction(Spot(k,1),r(k,1),q(k,1),Tiempo(k,1),Strike(k,1),...
-        HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-        q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3))...
-        ,0.1,0.1/100,1)-Sigma(k,1));
+%     fun= @(x)abs(dummyFunction(Spot(1,1),r(k,1),q(k,1),Tiempo(k,1),Strike(k,1),...
+%         HestonCallPrice(Spot(1,1),Strike(k,1),r(k,1),...
+%         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3))...
+%         ,0.1,0.1/100,1)-Sigma(k,1));
+    
+    fun=@(x)ErrorPromedio(Sigma(1,:),FuncionAux(Spot,Strike,r...
+        ,q,Tiempo,x(1),x(2),x(3),x(4),x(5))) 
     
     lb = [0, 0, 0, 0, -.9];
     ub = [1, 100, 1, .5, .9];
@@ -82,6 +89,7 @@ for k=1:10
     rho=x(5);
     psi=x(2)*x(3);
     x0=x;
+    
     parametros(1,k)=x(1);
     parametros(2,k)=x(2);
     parametros(3,k)=x(3);
@@ -89,17 +97,18 @@ for k=1:10
     parametros(5,k)=x(5);
     parametros(6,k)=x(2)*x(3);
     
-    ValorEmpirico(k,1)=HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-        q(k,1),Tiempo(k,1),vt,theta,w,sig,rho,psi);
-    
-    [~,SigmaEmpirico(k,1)]=VolBS2(Spot(k,1),r(k,1),q(k,1),Tiempo(k,1),Strike(k,1)...
-        ,HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-        q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3)),0.01,0.1/100,1);
+%     %ValorEmpirico(k,1)=HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
+%         q(k,1),Tiempo(k,1),vt,theta,w,sig,rho,psi);
+%     
+%     [~,SigmaEmpirico(k,1)]=VolBS2(Spot(k,1),r(k,1),q(k,1),Tiempo(k,1),Strike(k,1)...
+%         ,HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
+%         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3)),0.01,0.1/100,1);
 
 end
-% x=Sigma(:,1);
-% ErrorPromedio(Prueba,OptionValue(:,1))
-% ErrorPromedio(sigmaHeston,x)
 
-%%
+
+%% 
+% tic
+% [caca,poto]=PrimerDia(Spot,r,q,Tiempo,Strike,Sigma);
+% toc
 
