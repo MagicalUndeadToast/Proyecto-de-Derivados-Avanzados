@@ -26,7 +26,7 @@ OptionValue(1,:)=[];
 % Pasamos el tiempo a un numero entre 0 y 1.
 for i=1:size(T,1)
     for k=1:size(T,2)
-        Tiempo(i,k)=T(i,k)/T(i,5);
+        Tiempo(i,k)=T(i,k)/T(i,5); %#ok<*SAGROW>
     end
 end
 
@@ -140,15 +140,12 @@ end
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
 x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
-
+tinicial=1;
+tfinal=3;
 [parametros,SigmaEmpirico,tfinal,tpromedio] = ...
-    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',1,3);
+    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
 %% SMILE 
-
-
-
-
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
     if i==1
@@ -170,19 +167,8 @@ hold on
 [X1,Y1]=meshgrid(plotaux3,Date);
 Z1=plotaux;
 surf(X,Y,Z1,'FaceColor','b');
-
-
-% plot(plotaux3,plotaux),title(Tenores(i));
-% hold on;
-% plot(plotaux3,plotaux2);
-% legend("Smile Empirica","Smile Teorica");
-% xlabel("Pilares");
-% ylabel("Volatilidad");
-% xticks([1,2,3,4,5]);
-% xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
 k=i*5+1;
-
 end
 
 
