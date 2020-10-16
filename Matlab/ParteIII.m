@@ -127,7 +127,7 @@ hold off;
 x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
-[parametros,SigmaEmpirico] = ...
-    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',1,25);
+[parametros,SigmaEmpirico,tfinal,tpromedio] = ...
+    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',1,5);
 
 %%

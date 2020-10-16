@@ -7,7 +7,7 @@ function [parametros,SigmaEmpirico,tfinal,tpromedio] = ...
 switch opcion
     case{'Primer Dia'}
         tic;
-        fun=@(x)AuxFinale(Sigma(1,:),Spot,Strike,r,q,Tiempo,...
+        fun=@(x)AuxFinale(Sigma,Spot,Strike,r,q,Tiempo,...
             x(1),x(2),x(3),x(4),x(5),1); %#ok<*NODEF>
         lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
         ub = [1, 100, 1, .5, .9];
@@ -34,7 +34,7 @@ switch opcion
         tic;
         for i=finicial:ffinal
             if i==finicial
-                fun=@(x)AuxFinale(Sigma(finicial,:),Spot,Strike,r,q,Tiempo,...
+                fun=@(x)AuxFinale(Sigma,Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),finicial); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
@@ -57,7 +57,7 @@ switch opcion
                     (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),finicial);
             end
             if i>finicial
-                fun=@(x)AuxFinale(Sigma(i,:),Spot,Strike,r,q,Tiempo,...
+                fun=@(x)AuxFinale(Sigma,Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
@@ -87,7 +87,7 @@ switch opcion
         tic;
         for i=1:length(Spot)
             if i==1
-                fun=@(x)AuxFinale(Sigma(1,:),Spot,Strike,r,q,Tiempo,...
+                fun=@(x)AuxFinale(Sigma,Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),1); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
@@ -110,7 +110,7 @@ switch opcion
                     (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),1);
             end
             if i>1
-                fun=@(x)AuxFinale(Sigma(i,:),Spot,Strike,r,q,Tiempo,...
+                fun=@(x)AuxFinale(Sigma,Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
