@@ -116,7 +116,7 @@ plot(plotaux3,plotaux2);
 legend("Smile Empirica","Smile Teorica");
 xlabel("Pilares");
 ylabel("Volatilidad");
-xticks([1,2 3 4 5]);
+xticks([1,2 ,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
 %%

@@ -80,6 +80,8 @@ for k=1:1
     ub = [1, 100, 1, .5, .9];
     %options = optimset('Display','none');
     %x = fminsearch(fun,x0,options);
+%     options = optimoptions('fmincon','Display','none');
+%     x = fmincon(fun,x0,[],[],[],[],lb,ub,options);
     x = fmincon(fun,x0,[],[],[],[],lb,ub);
     
     vt=x(1);
@@ -119,4 +121,13 @@ ylabel("Volatilidad");
 xticks([1,2 ,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
+%%
+
+%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+% NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
+
+[parametros,SigmaEmpirico] = ...
+    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',1,25);
+
 %%
