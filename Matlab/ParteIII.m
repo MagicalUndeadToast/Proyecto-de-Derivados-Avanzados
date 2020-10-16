@@ -110,10 +110,13 @@ x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 
 %%
 for i=1:5
+    if i==1
+        k=1;
+    end
 figure(i);
-plotaux=[SigmaEmpirico(1,i),SigmaEmpirico(1,i+1),SigmaEmpirico(1,i+2),...
-    SigmaEmpirico(1,i+3),SigmaEmpirico(1,i+4)];
-plotaux2=[Sigma(1,i),Sigma(1,i+1),Sigma(1,i+2),Sigma(1,i+3),Sigma(1,i+4)];
+plotaux=[SigmaEmpirico(1,k),SigmaEmpirico(1,k+1),SigmaEmpirico(1,k+2),...
+    SigmaEmpirico(1,k+3),SigmaEmpirico(1,k+4)];
+plotaux2=[Sigma(1,k),Sigma(1,k+1),Sigma(1,k+2),Sigma(1,k+3),Sigma(1,k+4)];
 plotaux3=linspace(1,5,5);
 plot(plotaux3,plotaux);
 hold on;
@@ -124,6 +127,7 @@ ylabel("Volatilidad");
 xticks([1,2,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
+k=i*5;
 end
 %%
 
