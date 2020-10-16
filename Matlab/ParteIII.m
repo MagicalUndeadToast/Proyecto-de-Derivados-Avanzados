@@ -105,11 +105,18 @@ end
 
 
 %% 
-
-graf= [SigmaEmpirico(11),SigmaEmpirico(12),SigmaEmpirico(13),SigmaEmpirico(14),SigmaEmpirico(15)]
-graf2=[Sigma(1,11),Sigma(1,12),Sigma(1,13),Sigma(1,14),Sigma(1,15)]
-st= [Strike(1,11),Strike(1,12),Strike(1,13),Strike(1,14),Strike(1,15),]
-
-plot(graf)
-hold on
-plot(graf2), xlabel("0.9C, 0.75C, 0.5C, 0.75C, 0.9C")
+figure(1);
+plotaux=[SigmaEmpirico(1,1),SigmaEmpirico(1,2),SigmaEmpirico(1,3),...
+    SigmaEmpirico(1,4),SigmaEmpirico(1,5)];
+plotaux2=[Sigma(1,1),Sigma(1,2),Sigma(1,3),Sigma(1,4),Sigma(1,5)];
+plotaux3=linspace(1,5,5);
+plot(plotaux3,plotaux);
+hold on;
+plot(plotaux3,plotaux2);
+legend("Smile Empirica","Smile Teorica");
+xlabel("Pilares");
+ylabel("Volatilidad");
+xticks([1,2 ,3,4,5]);
+xticklabels({'10P','25P','50C','75C','90C'});
+hold off;
+%%
