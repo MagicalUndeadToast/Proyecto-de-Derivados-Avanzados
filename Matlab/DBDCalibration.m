@@ -26,6 +26,7 @@ switch opcion
         parametros(1,4)=x(4);
         parametros(1,5)=x(5);
         parametros(1,6)=x(2)*x(3);
+        disp("Iteracion 1"+" completada en " + toc + " segundos")
         SigmaEmpirico(1,:)=FuncionAux...
             (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),1);
         tfinal=toc;
@@ -38,7 +39,7 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),finicial); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
-                options = optimoptions('fmincon','Display','iter');
+                options = optimoptions('fmincon','Display','none');
                 x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
                 vt=x(1);
                 theta=x(2);
@@ -62,7 +63,7 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
-                options = optimoptions('fmincon','Display','iter');
+                options = optimoptions('fmincon','Display','none');
                 x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
                 vt=x(1);
                 theta=x(2);

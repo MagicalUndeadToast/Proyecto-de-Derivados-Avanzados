@@ -57,7 +57,7 @@ psi=theta.*w;
 %HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
 
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
-x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
 
 % CALIBRAMOS PARA EL DIA 1
@@ -140,10 +140,10 @@ end
 %%
 
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
-x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
-tinicial=10;
-tfinal=25;
+tinicial=1;
+tfinal=3;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
@@ -175,7 +175,7 @@ k=i*5+1;
 end
 %%
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
-x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
 [parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP] = ...
