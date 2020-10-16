@@ -157,8 +157,8 @@ plotaux=[SigmaEmpirico(:,k),SigmaEmpirico(:,k+1),SigmaEmpirico(:,k+2),...
 plotaux2=[Sigma(:,k),Sigma(:,k+1),Sigma(:,k+2),Sigma(:,k+3),Sigma(:,k+4)];
 plotaux3=linspace(1,5,5);
 
-[X,Y]=meshgrid(plotaux3,Date(1:3));
-Z=plotaux2(1:3,:);
+[X,Y]=meshgrid(plotaux3,Date(tinicial:tfinal));
+Z=plotaux2(tinicial:tfinal,:);
 surf(X,Y,Z,'FaceColor','r');
 xticks([1,2,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'}),ylabel("Fecha")
@@ -167,6 +167,7 @@ hold on
 [X1,Y1]=meshgrid(plotaux3,Date);
 Z1=plotaux;
 surf(X,Y,Z1,'FaceColor','b');
+legend("Smile Mercado","Smile Empirica")
 hold off;
 k=i*5+1;
 end
