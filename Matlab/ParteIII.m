@@ -108,8 +108,10 @@ x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 [parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Primer Dia');
 %%
-disp("El error promedio para el primer dia es: " + ErrorPromedio(SigmaEmpiricoPD,Sigma(1,:)))
-disp("El error promedio porcentual para el primer dia es: " + ErrorPromedioPorcentual(SigmaEmpiricoPD,Sigma(1,:)) + "%")
+disp("El error promedio para el primer dia es: " ...
+    + ErrorPromedio(SigmaEmpiricoPD,Sigma(1,:)))
+disp("El error promedio porcentual para el primer dia es: " ...
+    + ErrorPromedioPorcentual(SigmaEmpiricoPD,Sigma(1,:)) + "%")
 %%
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
@@ -141,8 +143,8 @@ end
 x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 tinicial=1;
-tfinal=3;
-[parametros,SigmaEmpirico,tfinal,tpromedio] = ...
+tfinal=25;
+[parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
 %% SMILE 
@@ -167,13 +169,44 @@ hold on
 [X1,Y1]=meshgrid(plotaux3,Date);
 Z1=plotaux;
 surf(X,Y,Z1,'FaceColor','b');
-legend("Smile Mercado","Smile Empirica")
+legend("Smile Teorica","Smile Empirica")
 hold off;
 k=i*5+1;
 end
+%%
+%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
+% NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
+[parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP] = ...
+    DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Completo');
 
+%% SMILE Completa
+Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
+for i=1:5
+    if i==1
+        k=1;
+    end  
+figure(i+10);
+plotaux=[SigmaEmpirico(:,k),SigmaEmpirico(:,k+1),SigmaEmpirico(:,k+2),...
+    SigmaEmpirico(:,k+3),SigmaEmpirico(:,k+4)];
+plotaux2=[Sigma(:,k),Sigma(:,k+1),Sigma(:,k+2),Sigma(:,k+3),Sigma(:,k+4)];
+plotaux3=linspace(1,5,5);
 
+[X,Y]=meshgrid(plotaux3,Date(:));
+Z=plotaux2(:,:);
+surf(X,Y,Z,'FaceColor','r');
+xticks([1,2,3,4,5]);
+xticklabels({'10P','25P','50C','75C','90C'}),ylabel("Fecha")
+xlabel("Pilar"), zlabel("Volatilidad"),title(Tenores(i))
+hold on
+[X1,Y1]=meshgrid(plotaux3,Date);
+Z1=plotaux;
+surf(X,Y,Z1,'FaceColor','b');
+legend("Smile Teorica","Smile Empirica")
+hold off;
+k=i*5+1;
+end
 
 
 
