@@ -38,7 +38,7 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),finicial); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
-                options = optimoptions('fmincon','Display','none');
+                options = optimoptions('fmincon','Display','iter');
                 x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
                 vt=x(1);
                 theta=x(2);
@@ -53,6 +53,7 @@ switch opcion
                 parametros(finicial,4)=x(4);
                 parametros(finicial,5)=x(5);
                 parametros(finicial,6)=x(2)*x(3);
+                disp("Iteracion "+i +" completada en " + toc + " segundos")
                 SigmaEmpirico=FuncionAux...
                     (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),finicial);
             end
@@ -61,7 +62,7 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
-                options = optimoptions('fmincon','Display','none');
+                options = optimoptions('fmincon','Display','iter');
                 x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
                 vt=x(1);
                 theta=x(2);
@@ -76,6 +77,7 @@ switch opcion
                 parametros(i,4)=x(4);
                 parametros(i,5)=x(5);
                 parametros(i,6)=x(2)*x(3);
+                disp("Iteracion "+i +" completada en " + toc + " segundos")
                 SigmaEmpirico=[SigmaEmpirico;...
                     FuncionAux(Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),i)];
@@ -107,6 +109,7 @@ switch opcion
                 parametros(1,4)=x(4);
                 parametros(1,5)=x(5);
                 parametros(1,6)=x(2)*x(3);
+                disp("Iteracion "+i +" completada en " + toc + " segundos")
                 SigmaEmpirico=FuncionAux...
                     (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),1);
             end
@@ -130,6 +133,7 @@ switch opcion
                 parametros(i,4)=x(4);
                 parametros(i,5)=x(5);
                 parametros(i,6)=x(2)*x(3);
+                disp("Iteracion "+i +" completada en " + toc + " segundos")
                 SigmaEmpirico=[SigmaEmpirico;...
                     FuncionAux(Spot,Strike,r,q,Tiempo,...
                     x(1),x(2),x(3),x(4),x(5),i)];
