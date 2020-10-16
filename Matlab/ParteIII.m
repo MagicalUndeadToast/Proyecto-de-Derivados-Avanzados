@@ -107,8 +107,11 @@ x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 
 [parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Primer Dia');
-
 %%
+disp("El error promedio para el primer dia es: " + ErrorPromedio(SigmaEmpiricoPD,Sigma(1,:)))
+disp("El error promedio porcentual para el primer dia es: " + ErrorPromedioPorcentual(SigmaEmpiricoPD,Sigma(1,:)) + "%")
+%%
+Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
     if i==1
         k=1;
@@ -118,7 +121,7 @@ plotaux=[SigmaEmpiricoPD(1,k),SigmaEmpiricoPD(1,k+1),SigmaEmpiricoPD(1,k+2),...
     SigmaEmpiricoPD(1,k+3),SigmaEmpiricoPD(1,k+4)];
 plotaux2=[Sigma(1,k),Sigma(1,k+1),Sigma(1,k+2),Sigma(1,k+3),Sigma(1,k+4)];
 plotaux3=linspace(1,5,5);
-plot(plotaux3,plotaux);
+plot(plotaux3,plotaux),title(Tenores(i));
 hold on;
 plot(plotaux3,plotaux2);
 legend("Smile Empirica","Smile Teorica");
@@ -128,7 +131,10 @@ xticks([1,2,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
 k=i*5+1;
+
 end
+
+
 %%
 
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
@@ -138,4 +144,49 @@ x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 [parametros,SigmaEmpirico,tfinal,tpromedio] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',1,3);
 
-%%
+%% SMILE 
+
+
+
+
+Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
+for i=1:5
+    if i==1
+        k=1;
+    end  
+figure(i+5);
+plotaux=[SigmaEmpirico(:,k),SigmaEmpirico(:,k+1),SigmaEmpirico(:,k+2),...
+    SigmaEmpirico(:,k+3),SigmaEmpirico(:,k+4)];
+plotaux2=[Sigma(:,k),Sigma(:,k+1),Sigma(:,k+2),Sigma(:,k+3),Sigma(:,k+4)];
+plotaux3=linspace(1,5,5);
+
+[X,Y]=meshgrid(plotaux3,Date(1:3));
+Z=plotaux2(1:3,:);
+surf(X,Y,Z,'FaceColor','r');
+xticks([1,2,3,4,5]);
+xticklabels({'10P','25P','50C','75C','90C'}),ylabel("Fecha")
+xlabel("Pilar"), zlabel("Volatilidad"),title(Tenores(i))
+hold on
+[X1,Y1]=meshgrid(plotaux3,Date);
+Z1=plotaux;
+surf(X,Y,Z1,'FaceColor','b');
+
+
+% plot(plotaux3,plotaux),title(Tenores(i));
+% hold on;
+% plot(plotaux3,plotaux2);
+% legend("Smile Empirica","Smile Teorica");
+% xlabel("Pilares");
+% ylabel("Volatilidad");
+% xticks([1,2,3,4,5]);
+% xticklabels({'10P','25P','50C','75C','90C'});
+hold off;
+k=i*5+1;
+
+end
+
+
+
+
+
+
