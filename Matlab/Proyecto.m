@@ -294,6 +294,6 @@ disp("El error promedio del fair value entre BS y Heston es de un: "...
 % Abrir una funcion open('').
 
 % plot(normalize(Strike(:,1)),SigmasObtenidos(:,1),'o')
-% xlabel('Strike'), ylabel('Volatilidad implicita'), title('Smile')
-%%
+% xlabel('Strike'), ylabel('Volatilidad implicita'), title(
+%%'Smile')
 

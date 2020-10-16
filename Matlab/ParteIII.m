@@ -108,11 +108,12 @@ x0 = [0.1, 0.01, 0.21, 0.5,0.5]; %Parametros iniciales NO TOCAAAAAR
 [parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Primer Dia');
 
-%% 
-figure(1);
-plotaux=[SigmaEmpirico(1,1),SigmaEmpirico(1,2),SigmaEmpirico(1,3),...
-    SigmaEmpirico(1,4),SigmaEmpirico(1,5)];
-plotaux2=[Sigma(1,1),Sigma(1,2),Sigma(1,3),Sigma(1,4),Sigma(1,5)];
+%%
+for i=1:5
+figure(i);
+plotaux=[SigmaEmpirico(1,i),SigmaEmpirico(1,i+1),SigmaEmpirico(1,i+2),...
+    SigmaEmpirico(1,i+3),SigmaEmpirico(1,i+4)];
+plotaux2=[Sigma(1,i),Sigma(1,i+1),Sigma(1,i+2),Sigma(1,i+3),Sigma(1,i+4)];
 plotaux3=linspace(1,5,5);
 plot(plotaux3,plotaux);
 hold on;
@@ -120,9 +121,10 @@ plot(plotaux3,plotaux2);
 legend("Smile Empirica","Smile Teorica");
 xlabel("Pilares");
 ylabel("Volatilidad");
-xticks([1,2 ,3,4,5]);
+xticks([1,2,3,4,5]);
 xticklabels({'10P','25P','50C','75C','90C'});
 hold off;
+end
 %%
 
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
