@@ -76,8 +76,9 @@ switch opcion
                 parametros(i,4)=x(4);
                 parametros(i,5)=x(5);
                 parametros(i,6)=x(2)*x(3);
-                SigmaEmpirico=FuncionAux...
-                    (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),i);
+                SigmaEmpirico=[SigmaEmpirico,...
+                    FuncionAux(Spot,Strike,r,q,Tiempo,...
+                    x(1),x(2),x(3),x(4),x(5),i)];
             end
             
         end
@@ -129,8 +130,9 @@ switch opcion
                 parametros(i,4)=x(4);
                 parametros(i,5)=x(5);
                 parametros(i,6)=x(2)*x(3);
-                SigmaEmpirico=FuncionAux...
-                    (Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5),i);
+                SigmaEmpirico=[SigmaEmpirico,...
+                    FuncionAux(Spot,Strike,r,q,Tiempo,...
+                    x(1),x(2),x(3),x(4),x(5),i)];
             end
         end
         tfinal=toc;
