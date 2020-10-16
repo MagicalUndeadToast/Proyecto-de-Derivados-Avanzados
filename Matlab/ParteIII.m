@@ -207,6 +207,6 @@ legend("Smile Teorica","Smile Empirica")
 hold off;
 k=i*5+1;
 end
-
+%%
 
 
