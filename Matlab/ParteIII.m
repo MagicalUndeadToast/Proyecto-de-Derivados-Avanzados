@@ -142,6 +142,7 @@ end
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
+
 tinicial=1;
 tfinal=25;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC] = ...
@@ -180,6 +181,8 @@ x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 
 [parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Completo');
+
+
 
 %% SMILE Completa
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];

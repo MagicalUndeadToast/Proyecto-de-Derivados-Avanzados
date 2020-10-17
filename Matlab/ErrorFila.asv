@@ -1,0 +1,4 @@
+function aux = ErrorFila(matriz1,matriz2)
+
+aux=mean(abs(matriz1-matriz2)')';
+end

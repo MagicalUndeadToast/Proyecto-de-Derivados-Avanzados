@@ -4,12 +4,17 @@ function [fairvalue,sigma,steps,vega,error] = VolBS2(Spot,r,q,Tiempo,Strike,Co,s
 sigma=sigmao;
 steps=0;
 psigma=0;
+
 while (abs(sigma-psigma))>accuracy
     psigma=sigma;
     [pfairvalue,pvega]=ValueBS(Spot,Strike,r,q,Tiempo,psigma,e);
     sigma=psigma+((Co-pfairvalue)./pvega);
     [fairvalue,vega]=ValueBS(Spot,Strike,r,q,Tiempo,sigma,e);
     steps=steps+1;
+    
+   if (steps >= 50)
+        break
+    end
 end
 error=abs(psigma-sigma);
 end
