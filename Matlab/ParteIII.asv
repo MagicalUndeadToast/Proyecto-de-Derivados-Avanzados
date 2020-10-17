@@ -152,11 +152,13 @@ for i=tinicial:tfinal
     Price=PreciosEmpiricos(Spot,Strike,r,q,Tiempo...
         ,parametrosFC(i,1),parametrosFC(i,2),parametrosFC(i,3),parametrosFC(i,4)...
         ,parametrosFC(i,5),i);
-    if(i==1)
-        OptionValueEmpirico=Price;
-    else
-        OptionValueEmpirico=[OptionValueEmpirico;Price];
-    end
+
+if(i==1)
+P=PreciosEmpiricos(Spot,Strike,r,q,Tiempo...
+        ,parametrosFC(i,1),parametrosFC(i,2),parametrosFC(i,3),parametrosFC(i,4)...
+        ,parametrosFC(i,5),i);
+else
+OptionValueEmpirico=OptionValueEmpirico;
 end
 
 %% SMILE 

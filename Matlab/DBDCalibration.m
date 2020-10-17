@@ -11,9 +11,10 @@ switch opcion
             x(1),x(2),x(3),x(4),x(5),1); %#ok<*NODEF>
         lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
         ub = [1, 100, 1, .5, .9];
+        nonlcon = @circlecon;
                 options = optimoptions('fmincon','Display',...
                     'none','OptimalityTolerance',1*exp(-5));
-        x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
+        x = fmincon(fun,x0,[],[],[],[],lb,ub,nonlcon,options);
         vt=x(1);
         theta=x(2);
         w=x(3);
@@ -40,9 +41,10 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),finicial); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
+                nonlcon = @circlecon;
                 options = optimoptions('fmincon','Display',...
                     'none','OptimalityTolerance',1*exp(-5));
-                x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
+                x = fmincon(fun,x0,[],[],[],[],lb,ub,nonlcon,options);
                 vt=x(1);
                 theta=x(2);
                 w=x(3);
@@ -65,9 +67,10 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
+                nonlcon = @circlecon;
                 options = optimoptions('fmincon','Display',...
                     'none','OptimalityTolerance',1*exp(-5));
-                x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
+                x = fmincon(fun,x0,[],[],[],[],lb,ub,nonlcon,options);
                 vt=x(1);
                 theta=x(2);
                 w=x(3);
@@ -98,9 +101,10 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),1); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
+                nonlcon = @circlecon;
                 options = optimoptions('fmincon','Display',...
                     'none','OptimalityTolerance',1*exp(-5));
-                x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
+                x = fmincon(fun,x0,[],[],[],[],lb,ub,nonlcon,options);
                 vt=x(1);
                 theta=x(2);
                 w=x(3);
@@ -123,9 +127,10 @@ switch opcion
                     x(1),x(2),x(3),x(4),x(5),i); %#ok<*NODEF>
                 lb = [0, 0, 0, 0, -.9]; %#ok<*NASGU>
                 ub = [1, 100, 1, .5, .9];
+                nonlcon = @circlecon;
                 options = optimoptions('fmincon','Display',...
                     'none','OptimalityTolerance',1*exp(-5));
-                x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
+                x = fmincon(fun,x0,[],[],[],[],lb,ub,nonlcon,options);
                 vt=x(1);
                 theta=x(2);
                 w=x(3);
