@@ -189,7 +189,7 @@ Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
     if i==1
         k=1;
-    end  
+    end
 figure(i+10);
 plotaux=[SigmaEmpiricoCP(:,k),SigmaEmpiricoCP(:,k+1),SigmaEmpiricoCP(:,k+2),...
     SigmaEmpiricoCP(:,k+3),SigmaEmpiricoCP(:,k+4)];
