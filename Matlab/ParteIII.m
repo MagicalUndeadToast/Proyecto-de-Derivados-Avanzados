@@ -143,7 +143,7 @@ end
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 tinicial=1;
-tfinal=3;
+tfinal=25;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
@@ -154,8 +154,8 @@ for i=1:5
         k=1;
     end  
 figure(i+5);
-plotaux=[SigmaEmpirico(:,k),SigmaEmpirico(:,k+1),SigmaEmpirico(:,k+2),...
-    SigmaEmpirico(:,k+3),SigmaEmpirico(:,k+4)];
+plotaux=[SigmaEmpiricoFC(:,k),SigmaEmpiricoFC(:,k+1),SigmaEmpiricoFC(:,k+2),...
+    SigmaEmpiricoFC(:,k+3),SigmaEmpiricoFC(:,k+4)];
 plotaux2=[Sigma(:,k),Sigma(:,k+1),Sigma(:,k+2),Sigma(:,k+3),Sigma(:,k+4)];
 plotaux3=linspace(1,5,5);
 
@@ -188,8 +188,8 @@ for i=1:5
         k=1;
     end  
 figure(i+10);
-plotaux=[SigmaEmpirico(:,k),SigmaEmpirico(:,k+1),SigmaEmpirico(:,k+2),...
-    SigmaEmpirico(:,k+3),SigmaEmpirico(:,k+4)];
+plotaux=[SigmaEmpiricoCP(:,k),SigmaEmpiricoCP(:,k+1),SigmaEmpiricoCP(:,k+2),...
+    SigmaEmpiricoCP(:,k+3),SigmaEmpiricoCP(:,k+4)];
 plotaux2=[Sigma(:,k),Sigma(:,k+1),Sigma(:,k+2),Sigma(:,k+3),Sigma(:,k+4)];
 plotaux3=linspace(1,5,5);
 
