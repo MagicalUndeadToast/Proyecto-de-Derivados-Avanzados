@@ -45,74 +45,23 @@ w=0.01;
 sig=0.5;
 rho=0.05;
 psi=theta.*w;
-%% Parametros con funcion min
-% vt=v(1);
-% theta=v(2);
-% w=v(3);
-% sig=v(4);
-% rho=v(5);
-% psi=v(6);
 
-%%
-%HestonCallPrice(Spot(1,1),Strike(1,1),r(1,1),q(1,1),Tiempo(1,1),vt,theta,w,sig,rho,psi)
+%% Calibramos para el primer dia
 
-%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+% Parametros iniciales
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
 
-% CALIBRAMOS PARA EL DIA 1
-% for k=1:1
-% %     fun = @(x)abs(HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-% %         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3))...
-% %         -OptionValue(k,1));
-% %     V0=HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-% %         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3));
-% %     
-% %     fun= @(x)abs(dummyFunction(Spot(1,1),r(k,1),q(k,1),Tiempo(k,1),Strike(k,1),...
-% %         HestonCallPrice(Spot(1,1),Strike(k,1),r(k,1),...
-% %         q(k,1),Tiempo(k,1),x(1),x(2),x(3),x(4),x(5),x(2)*x(3))...
-% %         ,0.1,0.1/100,1)-Sigma(k,1));
-%     
-%     fun=@(x)ErrorPromedio(Sigma(1,:),FuncionAux(Spot,Strike,r...
-%         ,q,Tiempo,x(1),x(2),x(3),x(4),x(5))) 
-%     
-%     lb = [0, 0, 0, 0, -.9];
-%     ub = [1, 100, 1, .5, .9];
-%     %options = optimset('Display','none');
-%     %x = fminsearch(fun,x0,options);
-% %     options = optimoptions('fmincon','Display','none');
-% %     x = fmincon(fun,x0,[],[],[],[],lb,ub,options);
-%     x = fmincon(fun,x0,[],[],[],[],lb,ub);
-%     
-%     vt=x(1);
-%     theta=x(2);
-%     w=x(3);
-%     sig=x(4);
-%     rho=x(5);
-%     psi=x(2)*x(3);
-%     x0=x;
-%     
-%     parametros(1,k)=x(1);
-%     parametros(2,k)=x(2);
-%     parametros(3,k)=x(3);
-%     parametros(4,k)=x(4);
-%     parametros(5,k)=x(5);
-%     parametros(6,k)=x(2)*x(3);
-%     
-% %     %ValorEmpirico(k,1)=HestonCallPrice(Spot(k,1),Strike(k,1),r(k,1),...
-% %         q(k,1),Tiempo(k,1),vt,theta,w,sig,rho,psi);
-% 
-%     SigmaEmpirico=FuncionAux(Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5))
-% end
-
+% Funcion que devuelve los parametros ,sigmas y precios calculados
+% con nuestro modelo. 
 [parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD,OptionValueEmpiricoPD] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Primer Dia');
-%%
+%% Se imprimen los errores de calibracion  del primer dia.
 disp("El error promedio para el primer dia es: " ...
     + ErrorPromedio(SigmaEmpiricoPD,Sigma(1,:)))
 disp("El error promedio porcentual para el primer dia es: " ...
     + ErrorPromedioPorcentual(SigmaEmpiricoPD,Sigma(1,:)) + "%")
-%%
+%% Graficos de la Smile del primer dia en 2D.
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
     if i==1
@@ -137,9 +86,9 @@ k=i*5+1;
 end
 
 
-%%
+%% Calibramos para datos entre TInicial y TFinal
 
-%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+% Parametros iniciales para empezar a calibrar.
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
@@ -148,8 +97,7 @@ tfinal=3;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpiricoFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
-
-%% SMILE 
+%% SMILE de la Data en 3D
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
 for i=1:5
     if i==1
@@ -175,6 +123,7 @@ legend("Smile Teorica","Smile Empirica")
 hold off;
 k=i*5+1;
 end
+
 %% Plot de la Evolucion de los Parametros.
 % Parametros a graficar evolucion fechas.
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
@@ -190,13 +139,23 @@ xlabel("Fechas");
 ylabel("Parametros");
 legend(NombreParametros);
 hold off;
-%%
-%NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
+
+%% Calibramos toda la Data
+
+% Parametros iniciales
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
 [parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP,OptionValueEmpiricoCP] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Completo');
+%% Se calculan los diferentes errores para los sigmas y precios.
+SigmaError=ErrorPromedio(SigmaEmpiricoCP,Sigma);
+PriceError=ErrorPromedio(OptionValueEmpiricoCP,OptionValue);
+SigmaPercentError=ErrorPromedioPorcentual(SigmaEmpiricoCP,Sigma);
+PriceErrorPercent=ErrorPromedioPorcentual(OptionValueEmpiricoCP,OptionValue);
+RowSigmaError=ErrorFila(SigmaEmpiricoCP,Sigma);
+RowPriceError=ErrorFila(OptionValueEmpiricoCP,OptionValue);
+
 
 
 
