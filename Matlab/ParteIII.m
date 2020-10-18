@@ -145,19 +145,9 @@ x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 
 tinicial=1;
 tfinal=3;
-[parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC] = ...
+[parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpirico] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
-for i=tinicial:tfinal
-    Price=PreciosEmpiricos(Spot,Strike,r,q,Tiempo...
-        ,parametrosFC(i,1),parametrosFC(i,2),parametrosFC(i,3),parametrosFC(i,4)...
-        ,parametrosFC(i,5),i);
-    if(i==1)
-        OptionValueEmpirico=Price;
-    else
-        OptionValueEmpirico=[OptionValueEmpirico;Price];
-    end
-end
 
 %% SMILE 
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
