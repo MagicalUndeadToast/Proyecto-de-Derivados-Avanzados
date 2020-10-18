@@ -105,7 +105,7 @@ x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 %     SigmaEmpirico=FuncionAux(Spot,Strike,r,q,Tiempo,x(1),x(2),x(3),x(4),x(5))
 % end
 
-[parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD] = ...
+[parametrosPD,SigmaEmpiricoPD,tfinalPD,tpromedioPD,OptionValueEmpiricoPD] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Primer Dia');
 %%
 disp("El error promedio para el primer dia es: " ...
@@ -145,7 +145,7 @@ x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 
 tinicial=1;
 tfinal=3;
-[parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpirico] = ...
+[parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpiricoFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 
 
@@ -180,7 +180,7 @@ end
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
 
-[parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP] = ...
+[parametrosCP,SigmaEmpiricoCP,tfinalCP,tpromedioCP,OptionValueEmpiricoCP] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Completo');
 
 
