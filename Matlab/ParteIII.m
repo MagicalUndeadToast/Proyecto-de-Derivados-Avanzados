@@ -220,7 +220,6 @@ xlabel("Fechas");
 ylabel("Parametros");
 legend(NombreParametros);
 hold off;
-hold off;
 %% A contiuacion se muestra los errores de la data.
 ErroresData();
 %%
