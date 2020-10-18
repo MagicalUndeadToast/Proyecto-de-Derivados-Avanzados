@@ -188,7 +188,7 @@ end
 title("Evolucion de los Parametros");
 xlabel("Fechas");
 ylabel("Parametros");
-legend(NombreParametros);
+legend(NombreParametros(i));
 hold off;
 %%
 %NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR 
@@ -231,15 +231,13 @@ end
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
 for i=1:6
 figure(17);
-plotaux=parametrosFC(:,i);
+plotaux=parametrosCP(:,i);
 plotaux2=Date(:);
-plot(plotaux2,plotaux);
 hold on;
-end
-title("Evolucion de los Parametros");
+plot(plotaux2,plotaux),title("Evolucion de los Parametros");
+legend(NombreParametros(i));
 xlabel("Fechas");
 ylabel("Parametros");
-legend(NombreParametros);
-hold off;
+end
 hold off;
 %%
