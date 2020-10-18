@@ -27,9 +27,9 @@ phi=(eps:dphi:maxphi)';
 % las operaciones matriciales y en aquellas elemento a elemento que luego
 % no coinciden con el resto de las otras.
 
-f1 = CF_SVj(log(Spot),vt,Tiempo,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
+f1 = AuxHeston(log(Spot),vt,Tiempo,r,q,theta*w,0.5,theta+psi-rho*sig,rho,sig,phi);
 P1 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f1./(1i*phi))*dphi);
-f2 = CF_SVj(log(Spot),vt,Tiempo,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
+f2 = AuxHeston(log(Spot),vt,Tiempo,r,q,theta*w,-0.5,theta+psi,rho,sig,phi);
 P2 = 0.5+(1/pi)*sum(real(exp(-1i*phi*log(Strike)).*f2./(1i*phi))*dphi);
 
 if(log(Spot)==0)

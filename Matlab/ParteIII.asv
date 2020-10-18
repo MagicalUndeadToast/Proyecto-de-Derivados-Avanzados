@@ -46,6 +46,26 @@ sig=0.5;
 rho=0.05;
 psi=theta.*w;
 
+%% Justificacion de los parametros
+y=diff(Sigma(:,3).^2);
+x=Sigma(2:804,3).^2;
+X=[ones(length(x),1),x];
+b=X\y
+A=b(1);
+B=b(2);
+%%
+deltaT=1/252;
+theta=-B/deltaT
+w=A/(theta*deltaT)
+theta=0.01;
+psi=theta*w;
+vt=std(Sigma(:,3));
+sig=psi^2*deltaT*vt
+rho=corrcoef(diff(Sigma(:,3).^2))
+%%
+plot(y)
+hold on
+plot(z)
 %% Calibramos para el primer dia
 
 % Parametros iniciales
@@ -110,12 +130,12 @@ tfinal=3;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpiricoFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 %% Se calculan los diferentes errores para los sigmas y precios para Fechas.
-SigmaErrorFC=ErrorPromedio(SigmaEmpiricoFC,Sigma(tinicial:tfinal,));
-PriceErrorFC=ErrorPromedio(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
-SigmaPercentErrorFC=ErrorPromedioPorcentual(SigmaEmpiricoFC,Sigma(tinicial:tfinal));
-PriceErrorPercentFC=ErrorPromedioPorcentual(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
-RowSigmaErrorFC=ErrorFila(SigmaEmpiricoFC,Sigma(tinicial:tfinal));
-RowPriceErrorFC=ErrorFila(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
+SigmaErrorFC=ErrorPromedio(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
+PriceErrorFC=ErrorPromedio(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
+SigmaPercentErrorFC=ErrorPromedioPorcentual(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
+PriceErrorPercentFC=ErrorPromedioPorcentual(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
+RowSigmaErrorFC=ErrorFila(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
+RowPriceErrorFC=ErrorFila(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
 
 %% SMILE de la Data en 3D
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
@@ -207,7 +227,7 @@ end
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
 for i=1:6
 figure(17);
-plotaux=parametrosFC(:,i);
+plotaux=parametrosCP(:,i);
 plotaux2=Date(:);
 plot(plotaux2,plotaux);
 hold on;
@@ -218,4 +238,5 @@ ylabel("Parametros");
 legend(NombreParametros);
 hold off;
 hold off;
-%%
+%% A contiuacion se muestra los errores de la data.
+ErroresData();

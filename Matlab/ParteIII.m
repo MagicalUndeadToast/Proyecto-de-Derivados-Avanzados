@@ -46,6 +46,10 @@ sig=0.5;
 rho=0.05;
 psi=theta.*w;
 
+%% Justificacion de los parametros
+clc
+X0Inicial=ParametrosIniciales(Sigma,Spot);
+
 %% Calibramos para el primer dia
 
 % Parametros iniciales
@@ -104,7 +108,6 @@ end
 % Parametros iniciales para empezar a calibrar.
 x0 = [0.1, 0.01, 0.21, 0.4,0.5]; %Parametros iniciales NO TOCAAAAAR
 % NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR NO TOCAAAAAR
-
 tinicial=1;
 tfinal=3;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpiricoFC] = ...
@@ -219,4 +222,4 @@ legend(NombreParametros);
 hold off;
 hold off;
 %% A contiuacion se muestra los errores de la data.
-ErroresData()
+ErroresData();

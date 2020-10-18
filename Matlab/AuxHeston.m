@@ -1,4 +1,4 @@
-function fj=CF_SVj(xt,vt,tau,r,q,a,uj,bj,rho,sig,phi)
+function fj=AuxHeston(xt,vt,tau,r,q,a,uj,bj,rho,sig,phi)
 
 %Datos a calibrar: Vt, rho, sig, theta y w.
 xj = bj - rho.*sig.*phi.*1i;
