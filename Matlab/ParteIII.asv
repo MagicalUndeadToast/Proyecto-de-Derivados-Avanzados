@@ -110,12 +110,12 @@ tfinal=3;
 [parametrosFC,SigmaEmpiricoFC,tfinalFC,tpromedioFC,OptionValueEmpiricoFC] = ...
     DBDCalibration(Sigma,Spot,Strike,r,q,Tiempo,x0,'Fechas',tinicial,tfinal);
 %% Se calculan los diferentes errores para los sigmas y precios para Fechas.
-SigmaErrorFC=ErrorPromedio(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
-PriceErrorFC=ErrorPromedio(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
-SigmaPercentErrorFC=ErrorPromedioPorcentual(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
-PriceErrorPercentFC=ErrorPromedioPorcentual(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
-RowSigmaErrorFC=ErrorFila(SigmaEmpiricoFC,Sigma(tinicial:tfinal,:));
-RowPriceErrorFC=ErrorFila(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal,:));
+SigmaErrorFC=ErrorPromedio(SigmaEmpiricoFC,Sigma(tinicial:tfinal,));
+PriceErrorFC=ErrorPromedio(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
+SigmaPercentErrorFC=ErrorPromedioPorcentual(SigmaEmpiricoFC,Sigma(tinicial:tfinal));
+PriceErrorPercentFC=ErrorPromedioPorcentual(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
+RowSigmaErrorFC=ErrorFila(SigmaEmpiricoFC,Sigma(tinicial:tfinal));
+RowPriceErrorFC=ErrorFila(OptionValueEmpiricoFC,OptionValue(tinicial:tfinal));
 
 %% SMILE de la Data en 3D
 Tenores=["1 Mes", "3 Meses", "6 Meses", "9 Meses", "12 Meses" ];
@@ -207,7 +207,7 @@ end
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
 for i=1:6
 figure(17);
-plotaux=parametrosCP(:,i);
+plotaux=parametrosFC(:,i);
 plotaux2=Date(:);
 plot(plotaux2,plotaux);
 hold on;
