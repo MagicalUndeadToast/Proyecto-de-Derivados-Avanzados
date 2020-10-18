@@ -151,7 +151,7 @@ end
 % Parametros a graficar evolucion fechas.
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
 for i=1:6
-figure(16);
+figure(15+i);
 plotaux=parametrosFC(:,i);
 plotaux2=Date(tinicial:tfinal);
 plot(plotaux2,plotaux);
@@ -209,17 +209,18 @@ end
 % Parametros a graficar evolucion completa.
 NombreParametros=["vt", "theta", "w", "sig", "rho", "psi"];
 for i=1:6
-figure(17);
+figure(21+i);
 plotaux=parametrosCP(:,i);
 plotaux2=Date(:);
 plot(plotaux2,plotaux);
 hold on;
-end
-title("Evolucion de los Parametros");
-xlabel("Fechas");
-ylabel("Parametros");
-legend(NombreParametros);
+title("Evolucion del Parametro "+NombreParametros(i));
+xlabel("Fechas");   
+ylabel(NombreParametros(i));
+legend(NombreParametros(i));
 hold off;
+end
+
 %% A contiuacion se muestra los errores de la data.
 ErroresData();
 %%
