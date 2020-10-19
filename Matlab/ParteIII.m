@@ -224,5 +224,19 @@ end
 
 %% A contiuacion se muestra los errores de la data.
 % Iteracion 804 completada en 6184.1895 segundos.
-ErroresData();
-%%
+x=ErroresData();
+
+%Grafica de los errores
+figure(28)
+plot(Date,x,'linewidth',1)
+xlabel("Fecha"),ylabel("Error promedio"), title("Error promedio en el tiempo")
+hold on
+yyaxis right
+plot(Date,Spot,'linewidth',1),ylabel("Precio Spot")
+legend({'Error promedio','Precio Spot'},"location",'northeast')
+
+
+
+
+
+
