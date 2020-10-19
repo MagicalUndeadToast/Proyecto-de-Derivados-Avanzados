@@ -156,12 +156,13 @@ plotaux=parametrosFC(:,i);
 plotaux2=Date(tinicial:tfinal);
 plot(plotaux2,plotaux);
 hold on;
-end
-title("Evolucion de los Parametros");
-xlabel("Fechas");
-ylabel("Parametros");
-legend(NombreParametros);
+title("Evolucion del Parametro "+NombreParametros(i));
+xlabel("Fechas");   
+ylabel(NombreParametros(i));
+legend(NombreParametros(i));
 hold off;
+end
+
 
 %% Calibramos toda la Data
 
@@ -222,5 +223,6 @@ hold off;
 end
 
 %% A contiuacion se muestra los errores de la data.
+% Iteracion 804 completada en 6184.1895 segundos.
 ErroresData();
 %%
