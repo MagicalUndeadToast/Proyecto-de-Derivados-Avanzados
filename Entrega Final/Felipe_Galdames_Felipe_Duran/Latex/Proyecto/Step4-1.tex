@@ -1,0 +1,19 @@
+\noindent En primera instancia, tenemos el depósito a plazo, cuya forma es determinista, dado que el comportamiento de este contrato es conocido, correspondiendo a la siguiente forma:
+
+\begin{equation}
+    V_0=D^{DOM}(T)=e^{-r\cdot t}
+    \label{MMA}
+\end{equation}
+\begin{equation*}
+    Con \;Payoff=1
+\end{equation*}
+
+\noindent Posteriormente, se procedió a realizar las respectivas simulaciones de \textit{Monte-Carlo}, moviéndonos a través de los diferentes \textit{Tenores} para el mismo pilar \textit{Delta} \textit{C10}. Con tal de probar que el modelo funcionara de manera correcta de forma determinista, se definió la volatilidad $\sigma=0$. Por otra parte, al tratarse de un depósito a plazo, el \textit{Payoff} siempre resulta igual a 1, por lo que el \textit{Strike Price} pierde importancia en esta situación.\\\\
+\noindent El resultado esperado de este computo es que el valor empírico entregado por la simulación coincida con el valor teórico que se obtiene con la fórmula $\ref{MMA}$, lo que para nuestro caso resulta un error prácticamente inexistente, específicamente del 7.3352e-15\%.\\\\
+\noindent Luego, se procedió a crear un intervalo de confianza con un nivel de confiabilidad del 99\%, en el cual se busca que los valores calculados anteriormente, se encuentren dentro de los límites del intervalo de confianza, una vez estandarizados utilizando la siguiente ecuación:
+\begin{equation}
+    Z=\frac{x-\mu}{\sigma}
+\end{equation}
+\noindent Por consiguiente, una vez realizados los procedimientos anteriormente mencionados, se obtuvo un porcentaje de datos dentro del intervalo de confianza del 100\%.\\\\
+\noindent En el caso de \textit{Heston}, se pudo observar que se obtuvo un 0\% de error, es decir, los valores en su totalidad coincidieron con el factor de descuento al aplicar la fórmula de \textit{Heston}. Lo anterior, puede atribuirse a como fue construida la función para el cálculo de \textit{Heston}. Por otra parte, se puede observar que, aplicando la misma metodología que para \textit{Monte-Carlos}, se obtuvo un 100\% de los datos dentro del intervalo de confianza.
+\newpage

@@ -1,0 +1,42 @@
+\indent En este paso, se busca encontrar un conjunto de parámetros iniciales razonables con los cuales realizar la calibración completa del modelo, ajustando este conjunto inicial en caso de ser necesario.\\\\
+\noindent Dado que nuestro modelo, el modelo de \textit{Heston}, sigue un proceso de volatilidad estocástica, se computó una regresión lineal, con tal de minimizar el error cuadrático  medio. Esta regresión se realizó considerando la volatilidad al cuadrado del primer \textit{Tenor} de 1 mes en el pilar delta \textit{ATM} como variable independiente, mientras que como variable dependiente se utilizó la diferencia de volatilidades al cuadrado entre $t$ y $(t+1)$, quedando el modelo de la siguiente forma:
+
+\begin{equation}
+      \Delta V=A+B\cdot{\sigma}^2_{ATM}
+\end{equation}
+\noindent En donde:
+\begin{equation*}
+    A=\Theta\cdot V_{\infty} \cdot \Delta t
+\end{equation*}
+\begin{equation*}
+    B=-\Theta \cdot \Delta t
+\end{equation*}
+
+\noindent Una vez realizada la regresión lineal, utilizando las ecuaciones anteriormente mencionadas, se obtuvo un conjunto de parámetros iniciales, el cual se procedió a analizar en mayor profundidad.\\\\
+\noindent Para el caso de $\Theta$, por ejemplo, se obtuvo un valor negativo, el cual fue remplazado por un valor de 0.01 para conservar la congruencia del modelo, según como se plantea en diferentes artículos académicos.\\\\
+\noindent Por otra parte, se procedió a aproximar la volatilidad de la volatilidad $\xi$ mediante la siguiente expresión:
+
+\begin{equation}
+    \xi=\psi^2 \cdot \Delta t \cdot \nu_t
+\end{equation}
+
+\noindent Finalmente, para el calculo de $\rho$ se realizo nuevamente una regresión lineal, pero en este caso, entre la diferencia del precio spot $S_0$ y la diferencia entre las volatilidades $\sigma$. Como resultado final, se obtuvieron los siguientes parámetros:
+
+\clearpage
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| r | l | c |}
+\hline 
+Parámetros & Valores  \\ \hline
+$\nu_0$ & $0.028821^2$  \\
+$\Theta$ & 0.010000  \\
+$\omega$ & 0.009691    \\
+$\xi$ & 6.3086e-07   \\
+$\rho$ & -0.296780 \\ \hline
+\end{tabular}
+\caption{Parámetros iniciales}
+\label{tab:fruta}
+\end{center}
+\end{table}
+
+\newpage

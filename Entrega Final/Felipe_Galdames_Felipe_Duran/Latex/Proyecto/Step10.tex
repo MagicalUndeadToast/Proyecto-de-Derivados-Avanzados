@@ -1,0 +1,8 @@
+\noindent En esta sección se busca plantear los elementos necesarios para lograr la calibración del modelo. En primera instancia, se planteó la ecuación objetivo a minimizar en el problema de optimización, buscando reducir el error de las volatilidades calculadas utilizando la fórmula de \textit{Heston} y los datos de mercado, como se puede observar en la siguiente ecuación:
+\begin{equation}
+\epsilon=\frac{1}{N} \cdot \sum_{i, j}\left|\sigma_{i j}^{m a r k e t}-\sigma_{i j}^{m o d e l}\right|
+\label{error}
+\end{equation}
+
+\noindent Esta misma función fue diseñada en \textit{Matlab} como \textit{ErrorPromedio}, en donde arroja el error de las volatilidades que componen la curva \textit{Smile} para una misma fecha. Esta función luego es utilizada para los algoritmos iterativos de calibración del modelo.
+\newpage

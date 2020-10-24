@@ -1,0 +1,38 @@
+\noindent En este paso del proyecto, se plantean los procedimientos y metodologías utilizados para la confección del motor de cálculo basado en simulaciones de \textit{Monte-Carlo}, sujeto a simular cambios en el \textit{Spot} subyacente a través de un modelo de \textit{Movimiento Browniano Geométrico}. Los cambios y simulaciones en el \textit{Spot} se realizan de la siguiente forma:
+
+\begin{equation}
+    dS_t=(r-q)\cdot S_t \cdot dt + \sigma \cdot S_t \cdot d{W_t}^Q
+\end{equation}
+
+\noindent En donde la variación de las fluctuaciones queda sujeto a la volatilidad $\sigma$, y en donde ${W_t}^Q$ corresponde a un proceso de \textit{Wiener}, el cuál entrega aleatoriedad al modelo, convirtiéndolo en un proceso estocástico. Para este caso en particular, se trabajó con el esquema analítico, debido a su fácil implementación, quedando de la siguiente manera:
+
+\begin{equation}
+    S_{t+1}=S_t \cdot e^{(r-q-\frac{\sigma^2}{2})\cdot \Delta t + \sigma \cdot \Delta W  }
+\end{equation}
+
+\noindent Cuya forma es equivalente a:
+
+\begin{equation}
+    S_{t+1}=S_t \cdot e^{(r-q-\frac{\sigma^2}{2})\cdot \Delta t + \sigma \cdot \sqrt{\Delta t} \cdot Z }
+\end{equation}
+\begin{equation*}
+    Con \; Z=Normal\;(0,1)
+\end{equation*}
+\noindent La formulación planteada anteriormente tiene como función el simular diferentes escenarios para el \textit{Spot} subyacente, específicamente realizando 10.000 simulaciones por cada aplicación en nuestro modelo, de la cuál cada una de ellas consta de una trayectoria diferente, determinada por el proceso de \textit{Wiener}. Una vez obtenidas las distintas simulaciones, se procedió a calcular el \textit{Payoff} $V_t$ de las opciones de la siguiente forma:
+\begin{equation}
+    V_t=V(S_t)=Max(S_t-K,0)
+\end{equation}
+\noindent Posteriormente, se procedió a calcular el costo de replicación descontado, conocido también como \textit{Payoff} descontado, el cual se calcula de la siguiente manera:
+
+\begin{equation}
+    Y_t=\frac{V_t}{e^{r\cdot t}}
+\end{equation}
+\noindent Finalmente, se procedió a calcular el precio de la opción $V_0$, el cual se obtuvo calculando el promedio de todos los \textit{Payoff} descontados conseguidos, tal como se puede ver en la siguiente expresión:
+\begin{equation}
+    \overline{V_0}(N)=\frac{1}{N} \cdot \sum_{i=1}^{N}Y_{i} 
+\end{equation}
+O bien en nuestro caso particular:
+\begin{equation*}
+    \overline{V_0}(10,000)=\frac{1}{10,000} \cdot \sum_{i=1}^{10,000}Y_{i} 
+\end{equation*}
+\newpage

@@ -1,0 +1,21 @@
+\noindent El objetivo de este paso consiste en incorporar una volatilidad constante al modelo planteado en preguntas anteriores, específicamente para opciones \textit{European Vanilla Call}, en donde se busca que los valores obtenidos a través de las simulaciones de \textit{Monte-Carlo} y con el Modelo de Heston coincidan con los valores teóricos de la fórmula de \textit{Black-Scholes} (\ref{BlackScholes}). Con este propósito, se utilizaron volatilidades constantes de 5\%, 10\%, 20\% y 50\%, realizando simulaciones para todos los \textit{Tenores} posibles, manteniendo el mismo pilar \textit{Delta} \textit{C10}, para todas las volatilidades anteriormente mencionadas. Así mismo se utilizaron las tasas de descuento y \textit{Strike Price} correspondientes.\\\\
+\noindent Cabe mencionar, que para encontrar una coincidencia entre los valores teóricos y empíricos, bajo el modelo de \textit{Heston}, fue necesario ajustar los parámetros iniciales entregados, extrayéndolos de diferentes documentos académicos (\textit{Papers}), correspondiendo a los siguientes valores: $\nu_t=0.01$, $\theta=0.015$, $\omega=0.01$, $\xi=0.25$ y $\rho=0.05$. Utilizando los parámetros anteriormente planteados, se cumple que las volatilidades permanecen relativamente constantes a lo largo de los diversos \textit{Tenores}, lo que nos permite comparar los resultados de manera más eficiente con aquellos obtenidos por la fórmula de \textit{Black-Scholes}.\\\\
+
+\noindent Posteriormente, se realizaron simulaciones con los modelos de  \textit{Monte-Carlos} y \textit{Heston} para las diversas volatilidades, \textit{Tenores}, y pilares \textit{Delta} \textit{C10} mencionados anteriormente. Los resultados se muestran en la siguiente tabla a continuación:\\\\
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| r | l | c |}
+\hline   
+Motor de Cálculo & Error \\ \hline
+Simulaciones de Monte-Carlo &  0.92959\% \\
+Modelo de Heston &  0.83849\% \\ \hline
+\end{tabular}
+\caption{Errores de los motores de cálculo respecto al Fair Value}
+\label{tab:fairValue}
+\end{center}
+\end{table}
+
+\noindent Podemos observar que el modelo de \textit{Heston} tiene una mayor precisión al momento de compararlo con la fórmula de \textit{Black-Scholes}, con un error de 0.83849\%.
+\newpage
+
